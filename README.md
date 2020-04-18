@@ -5,7 +5,7 @@ Helping Communities to Track COVID-19 Cases across India and World.
 [Live Version](https://www.livecovid19.org/) | [Developed By InverseSoft](https://www.inversesoft.com)
 
 
-This repository contains a source code opened for contributors to help development of [livecovid19.org](https://www.livecovid19.org). Based on [Light Blue Template](https://flatlogic.com/admin-dashboards/light-blue-html5/demo)
+This repository contains a source code opened for contributors to help development of [livecovid19.org](https://www.livecovid19.org).
 
 ## Quick Start
 
@@ -14,7 +14,7 @@ This repository contains a source code opened for contributors to help developme
 You can start by cloning the latest version of Light Blue Dashboard on your local machine by running:
 
 ```shell
-$ git clone https://gitlab.com/inversesoft/livecovid19.git MyApp
+$ git clone https://github.com/abhiways/livecovid19.git MyApp
 $ cd MyApp
 ```
 
