@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Covid 19 Live Tracker By InverseSoft</title>
+
+        <link href="css/application.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="COVID-19 India LIVE Tracker By InverseSoft">
+    <meta name="keywords" content="COVID-19, Live, Tracker, India">
+    <meta name="author" content="InverseSoft Pune">
+    <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="img/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="utf-8">
+    <script>
+        /* yeah we need this empty stylesheet here. It's cool chrome & chromium fix
+           chrome fix https://code.google.com/p/chromium/issues/detail?id=167083
+                      https://code.google.com/p/chromium/issues/detail?id=332189
+        */
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90646037-2"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-90646037-2');
+        </script>
+</head>
+<body>
+    <div class="logo">
+        <img src="img/logo.png" alt="livecovid19.org" height="60"/>
+    </div>
+    <div class="wrap">
+        <header class="page-header">
+            <div class="navbar">
+                <form id="search-form" class="navbar-form pull-right" role="search">
+                    <input type="search" class="form-control search-query" placeholder="Search...">
+                </form>
+                <div class="notifications pull-right">
+                    <div class="alert pull-right">
+                        <a href="#" class="close ml-xs" data-dismiss="alert">&times;</a>
+                        <i class="fa fa-info-circle mr-xs"></i> Note : <a id="notification-link" href="#"></a>Page refresh is not required.!
+                    </div>
+                </div>
+            </div>
+        </header>        <div class="content container">
+        <h2 class="page-title">COVID-19 TRACKER <small>Crowdsourced Initiative By InverseSoft</small></h2>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="widget">
+                    <header>
+                        <h4>
+                            <img src="img/live.gif" alt="livecovid19.org" height="15"/> LIVE INDIA
+                            <small>
+                                Trends.
+                            </small>
+                        </h4>
+                        <div class="widget-controls">
+                            <a title="Options" href="#"><i class="glyphicon glyphicon-cog"></i></a>
+                            <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                            <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+                        </div>
+                    </header>
+                    <div class="body no-margin">
+                        <div id="visits-chart" class="chart visits-chart">
+                            <svg></svg>
+                        </div>
+                        <div class="visits-info well well-sm">
+                            <div class="row">
+                                <div class="col-sm-3 col-xs-6">
+                                    <div class="key"><i class="fa fa-users"></i> Confirmed</div>
+                                    <div class="value"><span id="Confirmed">0</span> <i class="fa fa-caret-up color-red"></i> <span id="ConfirmedToday" class="changeData"></span></div>
+                                </div>
+                                <div class="col-sm-3 col-xs-6">
+                                    <div class="key"><i class="fa fa-bed"></i> Active</div>
+                                    <div class="value"><span id="Active">0</span> </div>
+                                </div>
+                                <div class="col-sm-3 col-xs-6">
+                                    <div class="key"><i class="fa fa-plus-square"></i> Recovered</div>
+                                    <div class="value"><span id="Recovered">0</span> <i class="fa fa-caret-up color-green"></i> <span id="RecoveredToday" class="changeData"></span></div>
+                                </div>
+                                <div class="col-sm-3 col-xs-6">
+                                    <div class="key"><i class="fa fa-ban"></i> Deceased</div>
+                                    <div class="value"><span id="Deceased">0</span> <i class="fa fa-caret-up color-red"></i> <span id="DeceasedToday" class="changeData"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="widget">
+                    <header>
+                        <h4>
+                            By States
+                            <small>
+                                &amp; Districts
+                            </small>
+                        </h4>
+                        <div class="widget-controls">
+                            <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-plus"></i></a>
+                            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-minus"></i></a>
+                            <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+                        </div>
+                    </header>
+                    <div class="table-responsive">
+                        <table id="StateData" class="table table-striped table-lg mt-sm mb-0 sources-table">
+                            <thead>
+                            <tr class="child">
+                                <th class="expander"></th>
+                                <th class="source-col-header">state</th>
+                                <th>confirmed</th>
+                                <th>active</th>
+                                <th>deaths</th>
+                                <th>recovered</th>
+                                <th>updated</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+            <!-- <div class="col-lg-4"> -->
+                <!-- <section class="widget large">
+                    <header>
+                        <h4>
+                            Feed
+                            <span class="label label-success">412</span>
+                        </h4>
+                        <div class="actions">
+                            <button class="btn btn-transparent btn-xs">Show All <i class="fa fa-arrow-down"></i></button>
+                        </div>
+                    </header>
+                    <div class="body">
+                        <div id="feed" class="feed">
+                            <div class="wrapper">
+                                <div class="vertical-line"></div>
+                                <section class="feed-item">
+                                    <div class="icon pull-left">
+                                        <i class="fa fa-comment"></i>
+                                    </div>
+                                    <div class="feed-item-body">
+                                        <div class="text">
+                                            <a href="#">John Doe</a> commented on <a href="#">What Makes Good Code Good</a>.
+                                        </div>
+                                        <div class="time pull-left">
+                                            3 h
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="feed-item">
+                                    <div class="icon pull-left">
+                                        <i class="fa fa-check color-green"></i>
+                                    </div>
+                                    <div class="feed-item-body">
+                                        <div class="text">
+                                            <a href="#">Merge request #42</a> has been approved by <a href="#">Jessica Lori</a>.
+                                        </div>
+                                        <div class="time pull-left">
+                                            10 h
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="feed-item">
+                                    <div class="icon pull-left">
+                                        <img src="img/14.png" class="img-circle" alt="">
+                                    </div>
+                                    <div class="feed-item-body">
+                                        <div class="text">
+                                            New user <a href="#">Greg Wilson</a> registered.
+                                        </div>
+                                        <div class="time pull-left">
+                                            Today
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="feed-item">
+                                    <div class="icon pull-left">
+                                        <i class="fa fa-bolt color-orange"></i>
+                                    </div>
+                                    <div class="feed-item-body">
+                                        <div class="text">
+                                            Server fail level raises above normal. <a href="#">See logs</a> for details.
+                                        </div>
+                                        <div class="time pull-left">
+                                            Yesterday
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="feed-item">
+                                    <div class="icon pull-left">
+                                        <i class="fa fa-database"></i>
+                                    </div>
+                                    <div class="feed-item-body">
+                                        <div class="text">
+                                            <a href="#">Database usage report</a> is ready.
+                                        </div>
+                                        <div class="time pull-left">
+                                            Yesterday
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="feed-item">
+                                    <div class="icon pull-left">
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="feed-item-body">
+                                        <div class="text">
+                                            <a href="#">Order #233985</a> needs additional processing.
+                                        </div>
+                                        <div class="time pull-left">
+                                            Wednesday
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="feed-item">
+                                    <div class="icon pull-left">
+                                        <i class="fa fa-arrow-down"></i>
+                                    </div>
+                                    <div class="feed-item-body">
+                                        <div class="text">
+                                            <a href="#">Load more...</a>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </section> -->
+                <!-- <section class="widget widget-tabs">
+                    <header>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#stats" data-toggle="tab">Users</a>
+                            </li>
+                            <li>
+                                <a href="#report" data-toggle="tab">Favorites</a>
+                            </li>
+                            <li>
+                                <a href="#dropdown1" data-toggle="tab">Commenters</a>
+                            </li>
+                        </ul>
+                    </header>
+                    <div class="body tab-content">
+                        <div id="stats" class="tab-pane active clearfix">
+                            <h5 class="tab-header"><span class="label label-primary"><i class="fa fa-facebook"></i></span> Last logged-in users</h5>
+                            <ul class="news-list">
+                                <li>
+                                    <img src="img/1.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Finees Lund</a></div>
+                                        <div class="position">Product Designer</div>
+                                        <div class="time">Last logged-in: Mar 20, 18:46</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/3.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Erebus Novak</a></div>
+                                        <div class="position">Software Engineer</div>
+                                        <div class="time">Last logged-in: Mar 23, 9:02</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/2.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Leopoldo Reier</a></div>
+                                        <div class="position">Chief Officer</div>
+                                        <div class="time">Last logged-in: Jun 6, 15:34</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Frans Garey</a></div>
+                                        <div class="position">Financial Assistant</div>
+                                        <div class="time">Last logged-in: Jun 8, 17:20</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/14.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Jessica Johnsson</a></div>
+                                        <div class="position">Sales Manager</div>
+                                        <div class="time">Last logged-in: Jun 8, 9:13</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="report" class="tab-pane">
+                            <h5 class="tab-header"><i class="fa fa-star"></i> Popular contacts</h5>
+                            <ul class="news-list news-list-no-hover">
+                                <li>
+                                    <img src="img/14.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Jessica Johnsson</a></div>
+                                        <div class="options">
+                                            <button class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </button>
+                                            <button class="btn btn-xs btn-warning">
+                                                <i class="fa fa-envelope-o"></i>
+                                                Message
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Frans Garey</a></div>
+                                        <div class="options">
+                                            <button class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </button>
+                                            <button class="btn btn-xs btn-warning">
+                                                <i class="fa fa-envelope-o"></i>
+                                                Message
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/3.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Erebus Novak</a></div>
+                                        <div class="options">
+                                            <button class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </button>
+                                            <button class="btn btn-xs btn-warning">
+                                                <i class="fa fa-envelope-o"></i>
+                                                Message
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/2.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Leopoldo Reier</a></div>
+                                        <div class="options">
+                                            <button class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </button>
+                                            <button class="btn btn-xs btn-warning">
+                                                <i class="fa fa-envelope-o"></i>
+                                                Message
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/1.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Finees Lund</a></div>
+                                        <div class="options">
+                                            <button class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </button>
+                                            <button class="btn btn-xs btn-warning">
+                                                <i class="fa fa-envelope-o"></i>
+                                                Message
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="dropdown1" class="tab-pane">
+                            <h5 class="tab-header"><i class="fa fa-comments"></i> Top Commenters</h5>
+                            <ul class="news-list">
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Frans Garey</a></div>
+                                        <div class="comment">
+                                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
+                                            sed quia
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/1.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Finees Lund</a></div>
+                                        <div class="comment">
+                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                                            eu fugiat.
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/14.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Jessica Johnsson</a></div>
+                                        <div class="comment">
+                                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                            deserunt.
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/3.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Erebus Novak</a></div>
+                                        <div class="comment">
+                                            Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium
+                                            doloremque.
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/2.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Leopoldo Reier</a></div>
+                                        <div class="comment">
+                                            Laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis
+                                            et quasi.
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section> -->
+                <!-- <section class="widget">
+                    <header>
+                        <h4>
+                            Server Overview
+                        </h4>
+                        <div class="actions">
+                            <small class="text-muted pull-right">2 days ago</small>
+                        </div>
+                    </header>
+                    <div class="body">
+                        <ul class="server-stats">
+                            <li>
+                                <div class="key pull-right">CPU</div>
+                                <div class="stat">
+                                    <div class="info">60% / 37&deg;C / 3.3 Ghz</div>
+                                    <div class="progress progress-small">
+                                        <div class="progress-bar progress-bar-danger" style="width: 70%;"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="key pull-right">Mem</div>
+                                <div class="stat">
+                                    <div class="info">29% / 4GB (16 GB)</div>
+                                    <div class="progress progress-small">
+                                        <div class="progress-bar" style="width: 29%;"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="key pull-right">LAN</div>
+                                <div class="stat">
+                                    <div class="info">6 Mb/s <i class="fa fa-caret-down"></i> &nbsp; 3 Mb/s <i class="fa fa-caret-up"></i></div>
+                                    <div class="progress progress-small">
+                                        <div class="progress-bar progress-bar-inverse" style="width: 48%;"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section> -->
+            <!-- </div> -->
+        </div>
+            <footer class="content-footer">
+               livecovid19.org | v.1.0.0 | &copy; 2020 <a href="https://inversesoft.com" rel="nofollow noopener noreferrer" target="_blank">InverseSoft</a> | To Join This OpenSource Project Email <a href="mailto:livecovid19org@gmail.com">livecovid19org@gmail.com</a>
+            </footer>
+        </div>
+        <div class="loader-wrap hiding hide">
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+        </div>
+    </div>
+<!-- common libraries. required for every page-->
+<script src="lib/jquery/dist/jquery.min.js"></script>
+<script src="lib/jquery-pjax/jquery.pjax.js"></script>
+<script src="lib/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
+<script src="lib/widgster/widgster.js"></script>
+<script src="lib/underscore/underscore.js"></script>
+
+<!-- common application js -->
+<script src="js/app.js"></script>
+<script src="js/settings.js"></script>
+
+<!-- common templates -->
+<script type="text/template" id="settings-template">
+    <div class="setting clearfix">
+        <div>Sidebar on the</div>
+        <div id="sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+            <% onRight = sidebar == 'right'%>
+            <button type="button" data-value="left" class="btn btn-sm btn-default <%= onRight? '' : 'active' %>">Left</button>
+            <button type="button" data-value="right" class="btn btn-sm btn-default <%= onRight? 'active' : '' %>">Right</button>
+        </div>
+    </div>
+    <div class="setting clearfix">
+        <div>Sidebar</div>
+        <div id="display-sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+            <% display = displaySidebar%>
+            <button type="button" data-value="true" class="btn btn-sm btn-default <%= display? 'active' : '' %>">Show</button>
+            <button type="button" data-value="false" class="btn btn-sm btn-default <%= display? '' : 'active' %>">Hide</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="sidebar-settings-template">
+    <% auto = sidebarState == 'auto'%>
+    <% if (auto) {%>
+    <button type="button"
+            data-value="icons"
+            class="btn-icons btn btn-transparent btn-sm">Icons</button>
+    <button type="button"
+            data-value="auto"
+            class="btn-auto btn btn-transparent btn-sm">Auto</button>
+    <%} else {%>
+    <button type="button"
+            data-value="auto"
+            class="btn btn-transparent btn-sm">Auto</button>
+    <% } %>
+</script>
+
+    <!-- page specific scripts -->
+        <!-- page libs -->
+        <script src="lib/slimScroll/jquery.slimscroll.min.js"></script>
+        <script src="lib/jquery.sparkline/index.js"></script>
+
+        <script src="lib/backbone/backbone.js"></script>
+        <script src="lib/backbone.localStorage/build/backbone.localStorage.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/rexeze/formatTimeStamp/src/index-cdn.js"></script>
+
+        <script src="lib/d3/d3.min.js"></script>
+        <script src="lib/nvd3/build/nv.d3.min.js"></script>
+
+        <!-- page application js -->
+        <script src="js/index.js"></script>
+        <script src="js/chat.js"></script>
+        <script src="js/socket.js"></script>
+        <script src="js/api.js"></script>
+
+
+        <!-- page template -->
+        <script type="text/template" id="message-template">
+            <div class="sender pull-left">
+                <div class="icon">
+                    <img src="img/2.png" class="img-circle" alt="">
+                </div>
+                <div class="time">
+                    just now
+                </div>
+            </div>
+            <div class="chat-message-body">
+                <span class="arrow"></span>
+                <div class="sender"><a href="#">Tikhon Laninga</a></div>
+                <div class="text">
+                    <%- text %>
+                </div>
+            </div>
+        </script>
+
+</body>
+</html>
