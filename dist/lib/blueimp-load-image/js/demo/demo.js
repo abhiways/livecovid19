@@ -19,7 +19,6 @@ $(function () {
   var iptcNode = $('#iptc')
   var thumbNode = $('#thumbnail')
   var actionsNode = $('#actions')
-  var currentFile
   var coordinates
   var jcropAPI
 
@@ -30,12 +29,16 @@ $(function () {
    * @param {object} tags Tags object
    */
   function displayTagData(node, tags) {
-    var table = node.find('table').empty()
+    var table = $('<table>')
     var row = $('<tr></tr>')
     var cell = $('<td></td>')
     var prop
     for (prop in tags) {
       if (Object.prototype.hasOwnProperty.call(tags, prop)) {
+        if (typeof tags[prop] === 'object') {
+          displayTagData(node, tags[prop])
+          continue
+        }
         table.append(
           row
             .clone()
@@ -44,7 +47,7 @@ $(function () {
         )
       }
     }
-    node.show()
+    node.append(table).show()
   }
 
   /**
@@ -56,11 +59,15 @@ $(function () {
    */
   function displayThumbnailImage(node, thumbnail, options) {
     if (thumbnail) {
-      thumbNode.empty()
+      var link = $('<a>')
+        .attr('href', loadImage.createObjectURL(thumbnail))
+        .attr('download', 'thumbnail.jpg')
+        .appendTo(node)
       loadImage(
         thumbnail,
         function (img) {
-          node.append(img).show()
+          link.append(img)
+          node.show()
         },
         options
       )
@@ -94,31 +101,33 @@ $(function () {
    * @param {object} [data] Meta data object
    */
   function updateResults(img, data) {
-    var fileName = currentFile.name
-    var href = currentFile.url || img.src
-    var dataURLStart
-    var content
     if (!(img.src || img instanceof HTMLCanvasElement)) {
-      content = $('<span>Loading image file failed</span>')
-    } else {
-      if (!href) {
-        href = img.toDataURL(currentFile.type)
-        // Check if file type is supported for the dataURL export:
-        dataURLStart = 'data:' + currentFile.type
-        if (href.slice(0, dataURLStart.length) !== dataURLStart) {
-          fileName = fileName.replace(/\.\w+$/, '.png')
-        }
-      }
-      content = $('<a target="_blank">')
-        .append(img)
-        .attr('download', fileName)
-        .attr('href', href)
+      result.children().replaceWith($('<span>Loading image file failed</span>'))
+      return
     }
+    var content = $('<a>').append(img)
     result.children().replaceWith(content)
-    if (img.getContext) {
-      actionsNode.show()
+    if (data) {
+      if (img.getContext) {
+        actionsNode.show()
+      }
+      displayMetaData(data)
+      result.data(data)
+    } else {
+      // eslint-disable-next-line no-param-reassign
+      data = result.data()
     }
-    displayMetaData(data)
+    if (data.imageHead && data.exif) {
+      // Reset Exif Orientation data:
+      loadImage.writeExifData(data.imageHead, data, 'Orientation', 1)
+      img.toBlob(function (blob) {
+        loadImage.replaceHead(blob, data.imageHead, function (newBlob) {
+          content
+            .attr('href', loadImage.createObjectURL(newBlob))
+            .attr('download', 'image.jpg')
+        })
+      }, 'image/jpeg')
+    }
   }
 
   /**
@@ -132,11 +141,12 @@ $(function () {
       canvas: true,
       pixelRatio: window.devicePixelRatio,
       downsamplingRatio: 0.5,
-      orientation: true
+      orientation: true,
+      meta: true
     }
-    exifNode.hide()
-    iptcNode.hide()
-    thumbNode.hide()
+    exifNode.hide().find('table').remove()
+    iptcNode.hide().find('table').remove()
+    thumbNode.hide().empty()
     if (!loadImage(file, updateResults, options)) {
       result
         .children()
@@ -163,7 +173,6 @@ $(function () {
     if (!file) {
       return
     }
-    currentFile = file
     displayImage(file)
   }
 
@@ -172,12 +181,7 @@ $(function () {
    */
   function urlChangeHandler() {
     var url = $(this).val()
-    if (!url || (currentFile && currentFile.url === url)) return
-    currentFile = {
-      name: url.replace(/^.*\//g, ''),
-      url: url
-    }
-    displayImage(url)
+    if (url) displayImage(url)
   }
 
   // Hide URL/FileReader API requirement message in capable browsers:

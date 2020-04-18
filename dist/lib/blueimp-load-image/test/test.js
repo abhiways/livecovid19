@@ -16,31 +16,34 @@
   'use strict'
 
   var canCreateBlob = !!window.dataURLtoBlob
-  // 80x60px GIF image (color black, base64 data):
+  // black 60x40 GIF
+  // Image data layout (B=black, F=white), scaled to 3x2:
+  // BFF
+  // BBB
   var b64DataGIF =
-    'R0lGODdhUAA8AIABAAAAAP///ywAAAAAUAA8AAACS4SPqcvtD6' +
-    'OctNqLs968+w+G4kiW5omm6sq27gvH8kzX9o3n+s73/g8MCofE' +
-    'ovGITCqXzKbzCY1Kp9Sq9YrNarfcrvcLDovH5PKsAAA7'
+    'R0lGODlhPAAoAPECAAAAAP///wAAAAAAACH5BAUAAAIALAAAAAA8ACgAQAJihI+Zwe0Po3Sq' +
+    '1okztvzoDwbdSJbmiaaqGbbTCrjyA9f2jef6Ts6+uPrNYEIZsdg6IkG8pvMJjUqnVOgypLxm' +
+    'stpXsLv9gr2q8UZshnDTjTUbWH7TqvS6/Y7P6/f8vv9vVwAAOw=='
   var imageUrlGIF = 'data:image/gif;base64,' + b64DataGIF
   var blobGIF = canCreateBlob && window.dataURLtoBlob(imageUrlGIF)
-  // 2x1px JPEG (color white, with the Exif orientation flag set to 6 and the
-  // IPTC ObjectName (2:5) set to 'objectname'):
+  // black+white 3x2 JPEG, with the following meta information set:
+  // - EXIF Orientation: 6 (Rotated 90° CCW)
+  // - IPTC ObjectName: blueimp.net
+  // Meta information has been set via exiftool (exiftool.org):
+  // exiftool -all= -Orientation#=6 -YCbCrPositioning= -ResolutionUnit= \
+  //   -YResolution= -XResolution= -ObjectName=blueimp.net black+white-3x2.jpg
+  // Image data layout (B=black, F=white):
+  // BFF
+  // BBB
   var b64DataJPEG =
-    '/9j/4AAQSkZJRgABAQEAYABgAAD/4QAiRXhpZgAASUkqAAgAAAABABIBAwABAAAA' +
-    'BgASAAAAAAD/7QAsUGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAA8cAgUACm9iamVj' +
-    'dG5hbWUA/9sAQwABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB' +
-    'AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB/9sAQwEBAQEBAQEBAQEBAQEBAQEB' +
-    'AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB' +
-    '/8AAEQgAAQACAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYH' +
-    'CAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGh' +
-    'CCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldY' +
-    'WVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1' +
-    'tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8B' +
-    'AAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAEC' +
-    'dwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBka' +
-    'JicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWG' +
-    'h4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ' +
-    '2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A/v4ooooA/9k='
+    '/9j/4QAiRXhpZgAATU0AKgAAAAgAAQESAAMAAAABAAYAAAAAAAD/7QA0UGhvdG9zaG9wIDMu' +
+    'MAA4QklNBAQAAAAAABccAgUAC2JsdWVpbXAubmV0HAIAAAIABAD/2wCEAAEBAQEBAQEBAQEB' +
+    'AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB' +
+    'AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB' +
+    'AQEBAQEBAQEBAf/AABEIAAIAAwMBEQACEQEDEQH/xABRAAEAAAAAAAAAAAAAAAAAAAAKEAEB' +
+    'AQADAQEAAAAAAAAAAAAGBQQDCAkCBwEBAAAAAAAAAAAAAAAAAAAAABEBAAAAAAAAAAAAAAAA' +
+    'AAAAAP/aAAwDAQACEQMRAD8AG8T9NfSMEVMhQvoP3fFiRZ+MTHDifa/95OFSZU5OzRzxkyej' +
+    'v8ciEfhSceSXGjS8eSdLnZc2HDm4M3BxcXwH/9k='
   var imageUrlJPEG = 'data:image/jpeg;base64,' + b64DataJPEG
   var blobJPEG = canCreateBlob && window.dataURLtoBlob(imageUrlJPEG)
   /**
@@ -65,6 +68,25 @@
     }
   }
 
+  /**
+   * Request helper function.
+   *
+   * @param {string} url URL to request
+   * @param {Function} callback Request callback
+   */
+  function request(url, callback) {
+    var xhr = new XMLHttpRequest()
+    xhr.onload = callback
+    xhr.onerror = callback
+    try {
+      xhr.open('GET', url, true)
+    } catch (e) {
+      callback.call(xhr, e)
+      return
+    }
+    xhr.send()
+  }
+
   describe('Loading', function () {
     it('Return an object with onload and onerror methods', function () {
       var img = loadImage(blobGIF, function () {})
@@ -76,8 +98,8 @@
     it('Load image url', function (done) {
       expect(
         loadImage(imageUrlGIF, function (img) {
-          expect(img.width).to.equal(80)
-          expect(img.height).to.equal(60)
+          expect(img.width).to.equal(60)
+          expect(img.height).to.equal(40)
           done()
         })
       ).to.be.ok
@@ -86,8 +108,8 @@
     it('Load image blob', function (done) {
       expect(
         loadImage(blobGIF, function (img) {
-          expect(img.width).to.equal(80)
-          expect(img.height).to.equal(60)
+          expect(img.width).to.equal(60)
+          expect(img.height).to.equal(40)
           done()
         })
       ).to.be.ok
@@ -103,42 +125,47 @@
       ).to.be.ok
     })
 
-    it('Keep object URL if noRevoke is true', function (done) {
-      expect(
-        loadImage(
-          blobGIF,
-          function (img) {
-            loadImage(img.src, function (img2) {
-              expect(img.width).to.equal(img2.width)
-              expect(img.height).to.equal(img2.height)
-              done()
-            })
-          },
-          { noRevoke: true }
-        )
-      ).to.be.ok
-    })
-
-    it('Discard object URL if noRevoke is undefined/false', function (done) {
-      expect(
-        loadImage(blobGIF, function (img) {
-          loadImage(img.src, function (img2) {
-            expect(img2).to.be.an.instanceOf(window.Event)
-            expect(img2.type).to.equal('error')
-            done()
-          })
-        })
-      ).to.be.ok
-    })
-
     it('Provide original image width+height in callback data', function (done) {
       expect(
         loadImage(imageUrlGIF, function (img, data) {
-          expect(data.originalWidth).to.equal(80)
-          expect(data.originalHeight).to.equal(60)
+          expect(data.originalWidth).to.equal(60)
+          expect(data.originalHeight).to.equal(40)
           done()
         })
       ).to.be.ok
+    })
+
+    describe('ObjectURL revoke', function () {
+      // Using XMLHttpRequest via the request helper function to test Object
+      // URLs to work around Edge Legacy and IE caching image URLs.
+      if (!window.XMLHttpRequest) return
+
+      it('Keep object URL if noRevoke is set to true', function (done) {
+        expect(
+          loadImage(
+            blobGIF,
+            function (img) {
+              request(img.src, function (event) {
+                expect(event.type).to.equal('load')
+                done()
+              })
+            },
+            { noRevoke: true }
+          )
+        ).to.be.ok
+      })
+
+      it('Discard object URL if noRevoke is not set', function (done) {
+        expect(
+          loadImage(blobGIF, function (img) {
+            request(img.src, function (event) {
+              // IE throws an error that has no type property:
+              expect(event.type).to.be.oneOf(['error', undefined])
+              done()
+            })
+          })
+        ).to.be.ok
+      })
     })
   })
 
@@ -149,13 +176,13 @@
           loadImage(
             blobGIF,
             function (img, data) {
-              expect(img.width).to.equal(40)
-              expect(img.height).to.equal(30)
-              expect(data.originalWidth).to.equal(80)
-              expect(data.originalHeight).to.equal(60)
+              expect(img.width).to.equal(30)
+              expect(img.height).to.equal(20)
+              expect(data.originalWidth).to.equal(60)
+              expect(data.originalHeight).to.equal(40)
               done()
             },
-            { maxWidth: 40 }
+            { maxWidth: 30 }
           )
         ).to.be.ok
       })
@@ -165,13 +192,13 @@
           loadImage(
             blobGIF,
             function (img, data) {
-              expect(img.width).to.equal(20)
-              expect(img.height).to.equal(15)
-              expect(data.originalWidth).to.equal(80)
-              expect(data.originalHeight).to.equal(60)
+              expect(img.width).to.equal(30)
+              expect(img.height).to.equal(20)
+              expect(data.originalWidth).to.equal(60)
+              expect(data.originalHeight).to.equal(40)
               done()
             },
-            { maxHeight: 15 }
+            { maxHeight: 20 }
           )
         ).to.be.ok
       })
@@ -181,13 +208,13 @@
           loadImage(
             blobGIF,
             function (img, data) {
-              expect(img.width).to.equal(160)
-              expect(img.height).to.equal(120)
-              expect(data.originalWidth).to.equal(80)
-              expect(data.originalHeight).to.equal(60)
+              expect(img.width).to.equal(120)
+              expect(img.height).to.equal(80)
+              expect(data.originalWidth).to.equal(60)
+              expect(data.originalHeight).to.equal(40)
               done()
             },
-            { minWidth: 160 }
+            { minWidth: 120 }
           )
         ).to.be.ok
       })
@@ -197,13 +224,13 @@
           loadImage(
             blobGIF,
             function (img, data) {
-              expect(img.width).to.equal(320)
-              expect(img.height).to.equal(240)
-              expect(data.originalWidth).to.equal(80)
-              expect(data.originalHeight).to.equal(60)
+              expect(img.width).to.equal(120)
+              expect(img.height).to.equal(80)
+              expect(data.originalWidth).to.equal(60)
+              expect(data.originalHeight).to.equal(40)
               done()
             },
-            { minHeight: 240 }
+            { minHeight: 80 }
           )
         ).to.be.ok
       })
@@ -213,11 +240,11 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(160)
-              expect(img.height).to.equal(120)
+              expect(img.width).to.equal(120)
+              expect(img.height).to.equal(80)
               done()
             },
-            { minWidth: 240, maxWidth: 160 }
+            { minWidth: 240, maxWidth: 120 }
           )
         ).to.be.ok
       })
@@ -227,11 +254,11 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(160)
-              expect(img.height).to.equal(120)
+              expect(img.width).to.equal(120)
+              expect(img.height).to.equal(80)
               done()
             },
-            { minHeight: 180, maxHeight: 120 }
+            { minHeight: 160, maxHeight: 80 }
           )
         ).to.be.ok
       })
@@ -241,11 +268,11 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(160)
-              expect(img.height).to.equal(120)
+              expect(img.width).to.equal(120)
+              expect(img.height).to.equal(80)
               done()
             },
-            { minWidth: 240, maxHeight: 120 }
+            { minWidth: 240, maxHeight: 80 }
           )
         ).to.be.ok
       })
@@ -255,11 +282,11 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(160)
-              expect(img.height).to.equal(120)
+              expect(img.width).to.equal(120)
+              expect(img.height).to.equal(80)
               done()
             },
-            { minHeight: 180, maxWidth: 160 }
+            { minHeight: 160, maxWidth: 120 }
           )
         ).to.be.ok
       })
@@ -269,13 +296,13 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(320)
-              expect(img.height).to.equal(240)
-              expect(img.style.width).to.equal('160px')
-              expect(img.style.height).to.equal('120px')
+              expect(img.width).to.equal(240)
+              expect(img.height).to.equal(160)
+              expect(img.style.width).to.equal('120px')
+              expect(img.style.height).to.equal('80px')
               done()
             },
-            { minWidth: 160, canvas: true, pixelRatio: 2 }
+            { minWidth: 120, canvas: true, pixelRatio: 2 }
           )
         ).to.be.ok
       })
@@ -285,13 +312,13 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(80)
-              expect(img.height).to.equal(60)
-              expect(img.style.width).to.equal('40px')
-              expect(img.style.height).to.equal('30px')
+              expect(img.width).to.equal(60)
+              expect(img.height).to.equal(40)
+              expect(img.style.width).to.equal('30px')
+              expect(img.style.height).to.equal('20px')
               done()
             },
-            { maxWidth: 40, canvas: true, pixelRatio: 2 }
+            { maxWidth: 30, canvas: true, pixelRatio: 2 }
           )
         ).to.be.ok
       })
@@ -301,11 +328,11 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(20)
-              expect(img.height).to.equal(15)
+              expect(img.width).to.equal(15)
+              expect(img.height).to.equal(10)
               done()
             },
-            { maxWidth: 20, canvas: true, downsamplingRatio: 0.5 }
+            { maxWidth: 15, canvas: true, downsamplingRatio: 0.5 }
           )
         ).to.be.ok
       })
@@ -315,11 +342,11 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(80)
-              expect(img.height).to.equal(60)
+              expect(img.width).to.equal(60)
+              expect(img.height).to.equal(40)
               done()
             },
-            { maxWidth: 160, maxHeight: 120 }
+            { maxWidth: 120, maxHeight: 80 }
           )
         ).to.be.ok
       })
@@ -329,11 +356,11 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(80)
-              expect(img.height).to.equal(60)
+              expect(img.width).to.equal(60)
+              expect(img.height).to.equal(40)
               done()
             },
-            { minWidth: 40, minHeight: 30 }
+            { minWidth: 30, minHeight: 20 }
           )
         ).to.be.ok
       })
@@ -345,11 +372,11 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(160)
-              expect(img.height).to.equal(120)
+              expect(img.width).to.equal(120)
+              expect(img.height).to.equal(80)
               done()
             },
-            { maxWidth: 160, maxHeight: 160, contain: true }
+            { maxWidth: 120, maxHeight: 120, contain: true }
           )
         ).to.be.ok
       })
@@ -359,11 +386,11 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(40)
-              expect(img.height).to.equal(30)
+              expect(img.width).to.equal(30)
+              expect(img.height).to.equal(20)
               done()
             },
-            { maxWidth: 40, maxHeight: 40, contain: true }
+            { maxWidth: 30, maxHeight: 30, contain: true }
           )
         ).to.be.ok
       })
@@ -375,7 +402,7 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(160)
+              expect(img.width).to.equal(180)
               expect(img.height).to.equal(120)
               done()
             },
@@ -389,11 +416,11 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(40)
-              expect(img.height).to.equal(30)
+              expect(img.width).to.equal(30)
+              expect(img.height).to.equal(20)
               done()
             },
-            { maxWidth: 30, maxHeight: 30, cover: true }
+            { maxWidth: 20, maxHeight: 20, cover: true }
           )
         ).to.be.ok
       })
@@ -411,11 +438,11 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(160)
+              expect(img.width).to.equal(120)
               expect(img.getContext('2d').imageSmoothingEnabled).to.equal(true)
               done()
             },
-            { minWidth: 160, canvas: true }
+            { minWidth: 120, canvas: true }
           )
         ).to.be.ok
       })
@@ -425,11 +452,11 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(160)
+              expect(img.width).to.equal(120)
               expect(img.getContext('2d').imageSmoothingEnabled).to.equal(false)
               done()
             },
-            { minWidth: 160, canvas: true, imageSmoothingEnabled: false }
+            { minWidth: 120, canvas: true, imageSmoothingEnabled: false }
           )
         ).to.be.ok
       })
@@ -446,11 +473,11 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(160)
+              expect(img.width).to.equal(120)
               expect(img.getContext('2d').imageSmoothingQuality).to.equal('low')
               done()
             },
-            { minWidth: 160, canvas: true }
+            { minWidth: 120, canvas: true }
           )
         ).to.be.ok
       })
@@ -460,13 +487,13 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(160)
+              expect(img.width).to.equal(120)
               expect(img.getContext('2d').imageSmoothingQuality).to.equal(
                 'medium'
               )
               done()
             },
-            { minWidth: 160, canvas: true, imageSmoothingQuality: 'medium' }
+            { minWidth: 120, canvas: true, imageSmoothingQuality: 'medium' }
           )
         ).to.be.ok
       })
@@ -476,13 +503,13 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(160)
+              expect(img.width).to.equal(120)
               expect(img.getContext('2d').imageSmoothingQuality).to.equal(
                 'high'
               )
               done()
             },
-            { minWidth: 160, canvas: true, imageSmoothingQuality: 'high' }
+            { minWidth: 120, canvas: true, imageSmoothingQuality: 'high' }
           )
         ).to.be.ok
       })
@@ -492,12 +519,12 @@
           loadImage(
             blobGIF,
             function (img) {
-              expect(img.width).to.equal(160)
+              expect(img.width).to.equal(120)
               expect(img.getContext('2d').imageSmoothingQuality).to.equal('low')
               done()
             },
             {
-              minWidth: 160,
+              minWidth: 120,
               canvas: true,
               imageSmoothingQuality: 'high',
               imageSmoothingEnabled: false
@@ -514,11 +541,11 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(40)
-            expect(img.height).to.equal(40)
+            expect(img.width).to.equal(30)
+            expect(img.height).to.equal(30)
             done()
           },
-          { maxWidth: 40, maxHeight: 40, crop: true }
+          { maxWidth: 30, maxHeight: 30, crop: true }
         )
       ).to.be.ok
     })
@@ -528,11 +555,11 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(40)
-            expect(img.height).to.equal(60)
+            expect(img.width).to.equal(30)
+            expect(img.height).to.equal(40)
             done()
           },
-          { maxWidth: 40, maxHeight: 60, crop: true }
+          { maxWidth: 30, maxHeight: 40, crop: true }
         )
       ).to.be.ok
     })
@@ -542,11 +569,11 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(40)
-            expect(img.height).to.equal(40)
+            expect(img.width).to.equal(30)
+            expect(img.height).to.equal(30)
             done()
           },
-          { sourceWidth: 40, sourceHeight: 40, crop: true }
+          { sourceWidth: 30, sourceHeight: 30, crop: true }
         )
       ).to.be.ok
     })
@@ -560,7 +587,7 @@
             expect(img.height).to.equal(20)
             done()
           },
-          { left: 40, top: 40, crop: true }
+          { left: 20, top: 20, crop: true }
         )
       ).to.be.ok
     })
@@ -574,7 +601,7 @@
             expect(img.height).to.equal(20)
             done()
           },
-          { right: 40, bottom: 40, crop: true }
+          { right: 20, bottom: 20, crop: true }
         )
       ).to.be.ok
     })
@@ -584,8 +611,8 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(80)
-            expect(img.height).to.equal(40)
+            expect(img.width).to.equal(60)
+            expect(img.height).to.equal(30)
             done()
           },
           { aspectRatio: 2 }
@@ -593,16 +620,16 @@
       ).to.be.ok
     })
 
-    it('Crop using the given 2:3 aspectRatio', function (done) {
+    it('Crop using the given 1:2 aspectRatio', function (done) {
       expect(
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(40)
-            expect(img.height).to.equal(60)
+            expect(img.width).to.equal(20)
+            expect(img.height).to.equal(40)
             done()
           },
-          { aspectRatio: 2 / 3 }
+          { aspectRatio: 1 / 2 }
         )
       ).to.be.ok
     })
@@ -646,15 +673,6 @@
           function (img) {
             expect(img.width).to.equal(10)
             expect(img.height).to.equal(10)
-
-            var data = img.getContext('2d').getImageData(0, 0, 10, 10).data
-            for (var i = 0; i < data.length / 4; i += 4) {
-              expect(data[i]).to.equal(0)
-              expect(data[i + 1]).to.equal(0)
-              expect(data[i + 2]).to.equal(0)
-              expect(data[i + 3]).to.equal(255)
-            }
-
             done()
           },
           { maxWidth: 10, maxHeight: 10, crop: true, downsamplingRatio: 0.5 }
@@ -669,8 +687,8 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(80)
-            expect(img.height).to.equal(60)
+            expect(img.width).to.equal(60)
+            expect(img.height).to.equal(40)
             done()
           },
           { orientation: 1 }
@@ -683,8 +701,8 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(60)
-            expect(img.height).to.equal(80)
+            expect(img.width).to.equal(40)
+            expect(img.height).to.equal(60)
             done()
           },
           { orientation: 8 }
@@ -697,8 +715,8 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(60)
-            expect(img.height).to.equal(80)
+            expect(img.width).to.equal(40)
+            expect(img.height).to.equal(60)
             done()
           },
           { orientation: 6 }
@@ -711,11 +729,11 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(30)
-            expect(img.height).to.equal(40)
+            expect(img.width).to.equal(20)
+            expect(img.height).to.equal(30)
             done()
           },
-          { orientation: 6, maxWidth: 30, maxHeight: 40 }
+          { orientation: 6, maxWidth: 20, maxHeight: 30 }
         )
       ).to.be.ok
     })
@@ -725,11 +743,11 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(30)
-            expect(img.height).to.equal(60)
+            expect(img.width).to.equal(20)
+            expect(img.height).to.equal(30)
             done()
           },
-          { orientation: 5, left: 30, top: 20 }
+          { orientation: 5, left: 20, top: 30 }
         )
       ).to.be.ok
     })
@@ -739,11 +757,11 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(30)
-            expect(img.height).to.equal(60)
+            expect(img.width).to.equal(20)
+            expect(img.height).to.equal(30)
             done()
           },
-          { orientation: 5, right: 30, bottom: 20 }
+          { orientation: 5, right: 20, bottom: 30 }
         )
       ).to.be.ok
     })
@@ -753,11 +771,11 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(30)
-            expect(img.height).to.equal(60)
+            expect(img.width).to.equal(20)
+            expect(img.height).to.equal(30)
             done()
           },
-          { orientation: 7, left: 30, bottom: 20 }
+          { orientation: 7, left: 20, bottom: 30 }
         )
       ).to.be.ok
     })
@@ -767,11 +785,11 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(30)
-            expect(img.height).to.equal(60)
+            expect(img.width).to.equal(20)
+            expect(img.height).to.equal(30)
             done()
           },
-          { orientation: 7, right: 30, top: 20 }
+          { orientation: 7, right: 20, top: 30 }
         )
       ).to.be.ok
     })
@@ -781,10 +799,10 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(120)
-            expect(img.height).to.equal(160)
-            expect(img.style.width).to.equal('60px')
-            expect(img.style.height).to.equal('80px')
+            expect(img.width).to.equal(80)
+            expect(img.height).to.equal(120)
+            expect(img.style.width).to.equal('40px')
+            expect(img.style.height).to.equal('60px')
             done()
           },
           { orientation: 8, pixelRatio: 2 }
@@ -797,10 +815,10 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(120)
-            expect(img.height).to.equal(160)
-            expect(img.style.width).to.equal('60px')
-            expect(img.style.height).to.equal('80px')
+            expect(img.width).to.equal(80)
+            expect(img.height).to.equal(120)
+            expect(img.style.width).to.equal('40px')
+            expect(img.style.height).to.equal('60px')
             done()
           },
           { orientation: 6, pixelRatio: 2 }
@@ -813,8 +831,8 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(80)
-            expect(img.height).to.equal(60)
+            expect(img.width).to.equal(60)
+            expect(img.height).to.equal(40)
             done()
           },
           { orientation: -1 }
@@ -827,8 +845,8 @@
         loadImage(
           blobGIF,
           function (img) {
-            expect(img.width).to.equal(80)
-            expect(img.height).to.equal(60)
+            expect(img.width).to.equal(60)
+            expect(img.height).to.equal(40)
             done()
           },
           { orientation: 9 }
@@ -844,11 +862,46 @@
             expect(data).to.be.ok
             expect(data.exif).to.be.ok
             expect(data.exif.get('Orientation')).to.equal(6)
-            expect(img.width).to.equal(1)
-            expect(img.height).to.equal(2)
+            expect(img.width).to.equal(2)
+            expect(img.height).to.equal(3)
+            // Image data layout after orientation (B=black, F=white):
+            // BB
+            // BF
+            // BF
+            var imageData = img.getContext('2d').getImageData(0, 0, 2, 3).data
+            // 0:0 opaque black
+            expect(imageData[0]).to.equal(0)
+            expect(imageData[1]).to.equal(0)
+            expect(imageData[2]).to.equal(0)
+            expect(imageData[3]).to.equal(255)
+            // 0:1 opaque black
+            expect(imageData[0 + 4]).to.equal(0)
+            expect(imageData[1 + 4]).to.equal(0)
+            expect(imageData[2 + 4]).to.equal(0)
+            expect(imageData[3 + 4]).to.equal(255)
+            // 1:0 opaque black
+            expect(imageData[0 + 8]).to.equal(0)
+            expect(imageData[1 + 8]).to.equal(0)
+            expect(imageData[2 + 8]).to.equal(0)
+            expect(imageData[3 + 8]).to.equal(255)
+            // 1:1 opaque white
+            expect(imageData[0 + 12]).to.equal(255)
+            expect(imageData[1 + 12]).to.equal(255)
+            expect(imageData[2 + 12]).to.equal(255)
+            expect(imageData[3 + 12]).to.equal(255)
+            // 2:0 opaque black
+            expect(imageData[0 + 16]).to.equal(0)
+            expect(imageData[1 + 16]).to.equal(0)
+            expect(imageData[2 + 16]).to.equal(0)
+            expect(imageData[3 + 16]).to.equal(255)
+            // 2:1 opaque white
+            expect(imageData[0 + 20]).to.equal(255)
+            expect(imageData[1 + 20]).to.equal(255)
+            expect(imageData[2 + 20]).to.equal(255)
+            expect(imageData[3 + 20]).to.equal(255)
             done()
           },
-          { orientation: true }
+          { orientation: true, meta: true, canvas: true }
         )
       ).to.be.ok
     })
@@ -858,13 +911,34 @@
         loadImage(
           blobJPEG,
           function (img) {
-            expect(img.width).to.equal(10)
-            expect(img.height).to.equal(20)
+            expect(img.width).to.equal(20)
+            expect(img.height).to.equal(30)
             done()
           },
-          { orientation: true, minWidth: 10, minHeight: 20 }
+          { orientation: true, minWidth: 20, minHeight: 30 }
         )
       ).to.be.ok
+    })
+
+    describe('from-image', function () {
+      if (!loadImage.orientation) return
+
+      it('Should use automatic browser image orientation', function (done) {
+        expect(
+          loadImage(
+            blobJPEG,
+            function (img, data) {
+              expect(data).to.be.ok
+              expect(data.exif).to.be.undefined
+              expect(img.getContext).to.be.undefined
+              expect(img.width).to.equal(2)
+              expect(img.height).to.equal(3)
+              done()
+            },
+            { orientation: true }
+          )
+        ).to.be.ok
+      })
     })
   })
 
@@ -900,11 +974,11 @@
           function (img) {
             expect(img.getContext).to.be.ok
             expect(img.nodeName.toLowerCase()).to.equal('canvas')
-            expect(img.width).to.equal(40)
-            expect(img.height).to.equal(30)
+            expect(img.width).to.equal(30)
+            expect(img.height).to.equal(20)
             done()
           },
-          { canvas: true, maxWidth: 40 }
+          { canvas: true, maxWidth: 30 }
         )
       ).to.be.ok
     })
@@ -916,12 +990,12 @@
           function (img) {
             // eslint-disable-next-line no-param-reassign
             img = loadImage.scale(img, {
-              maxWidth: 40
+              maxWidth: 30
             })
             expect(img.getContext).to.be.ok
             expect(img.nodeName.toLowerCase()).to.equal('canvas')
-            expect(img.width).to.equal(40)
-            expect(img.height).to.equal(30)
+            expect(img.width).to.equal(30)
+            expect(img.height).to.equal(20)
             done()
           },
           { canvas: true }
@@ -939,12 +1013,158 @@
       })
     })
 
+    it('Should not parse Exif tags if disabled', function (done) {
+      loadImage.parseMetaData(
+        blobJPEG,
+        function (data) {
+          expect(data.exif).to.be.undefined
+          done()
+        },
+        { disableExif: true }
+      )
+    })
+
+    it('Should parse Exif tag offsets', function (done) {
+      loadImage.parseMetaData(blobJPEG, function (data) {
+        expect(data.exifOffsets).to.be.ok
+        expect(data.exifOffsets.get('Orientation')).to.equal(0x16)
+        expect(data.exifTiffOffset).to.equal(0xc)
+        expect(data.exifLittleEndian).to.equal(false)
+        done()
+      })
+    })
+
+    it('Should not parse Exif tag offsets if disabled', function (done) {
+      loadImage.parseMetaData(
+        blobJPEG,
+        function (data) {
+          expect(data.exifOffsets).to.be.undefined
+          done()
+        },
+        { disableExifOffsets: true }
+      )
+    })
+
+    it('Should only parse included Exif tags', function (done) {
+      loadImage.parseMetaData(
+        blobJPEG,
+        function (data) {
+          expect(data.exif).to.be.ok
+          expect(data.exif.get('Orientation')).to.equal(6)
+          loadImage.parseMetaData(
+            blobJPEG,
+            function (data) {
+              expect(data.exif).to.be.ok
+              expect(data.exif.get('Orientation')).to.be.undefined
+              done()
+            },
+            { includeExifTags: { 0x0132: true } } // DateTime
+          )
+        },
+        { includeExifTags: { 0x0112: true } } // Orientation
+      )
+    })
+
+    it('Should not parse excluded Exif tags', function (done) {
+      loadImage.parseMetaData(
+        blobJPEG,
+        function (data) {
+          expect(data.exif).to.be.ok
+          expect(data.exif.get('Orientation')).to.equal(6)
+          loadImage.parseMetaData(
+            blobJPEG,
+            function (data) {
+              expect(data.exif).to.be.ok
+              expect(data.exif.get('Orientation')).to.be.undefined
+              done()
+            },
+            { excludeExifTags: { 0x0112: true } } // Orientation
+          )
+        },
+        { excludeExifTags: { 0x0132: true } } // DateTime
+      )
+    })
+
     it('Should parse IPTC tags', function (done) {
       loadImage.parseMetaData(blobJPEG, function (data) {
         expect(data.iptc).to.be.ok
-        expect(data.iptc.get('ObjectName')).to.equal('objectname')
+        expect(data.iptc.get('ObjectName')).to.equal('blueimp.net')
         done()
       })
+    })
+
+    it('Should not parse IPTC tags if disabled', function (done) {
+      loadImage.parseMetaData(
+        blobJPEG,
+        function (data) {
+          expect(data.iptc).to.be.undefined
+          done()
+        },
+        { disableIptc: true }
+      )
+    })
+
+    it('Should parse IPTC tag offsets', function (done) {
+      loadImage.parseMetaData(blobJPEG, function (data) {
+        expect(data.iptcOffsets).to.be.ok
+        expect(data.iptcOffsets.get('ObjectName')).to.equal(0x44)
+        done()
+      })
+    })
+
+    it('Should not parse IPTC tag offsets if disabled', function (done) {
+      loadImage.parseMetaData(
+        blobJPEG,
+        function (data) {
+          expect(data.iptcOffsets).to.be.undefined
+          done()
+        },
+        { disableIptcOffsets: true }
+      )
+    })
+
+    it('Should only parse included IPTC tags', function (done) {
+      loadImage.parseMetaData(
+        blobJPEG,
+        function (data) {
+          expect(data.iptc).to.be.ok
+          expect(data.iptc.get('ApplicationRecordVersion')).to.be.undefined
+          expect(data.iptc.get('ObjectName')).to.equal('blueimp.net')
+          loadImage.parseMetaData(
+            blobJPEG,
+            function (data) {
+              expect(data.iptc).to.be.ok
+              expect(data.iptc.get('ApplicationRecordVersion')).to.equal(4)
+              expect(data.iptc.get('ObjectName')).to.be.undefined
+              done()
+            },
+            { includeIptcTags: { 0: true } } // ApplicationRecordVersion
+          )
+        },
+        { includeIptcTags: { 5: true } } // ObjectName
+      )
+    })
+
+    it('Should not parse excluded IPTC tags', function (done) {
+      loadImage.parseMetaData(
+        blobJPEG,
+        function (data) {
+          expect(data.iptc).to.be.ok
+          expect(data.iptc.get('ApplicationRecordVersion')).to.equal(4)
+          expect(data.iptc.get('ObjectName')).to.be.undefined
+          loadImage.parseMetaData(
+            blobJPEG,
+            function (data) {
+              expect(data.iptc).to.be.ok
+              expect(data.iptc.get('ApplicationRecordVersion')).to.be.undefined
+              expect(data.iptc.get('ObjectName')).to.equal('blueimp.net')
+              done()
+            },
+            { excludeIptcTags: { 0: true } } // Orientation
+          )
+        },
+        { excludeIptcTags: { 5: true } } // DateTime
+      )
     })
 
     it('Should parse the complete image head', function (done) {
@@ -961,6 +1181,17 @@
       })
     })
 
+    it('Should not parse the complete image head if disabled', function (done) {
+      loadImage.parseMetaData(
+        blobJPEG,
+        function (data) {
+          expect(data.imageHead).to.be.undefined
+          done()
+        },
+        { disableImageHead: true }
+      )
+    })
+
     it('Should parse meta data automatically', function (done) {
       expect(
         loadImage(
@@ -971,12 +1202,46 @@
             expect(data.exif).to.be.ok
             expect(data.exif.get('Orientation')).to.equal(6)
             expect(data.iptc).to.be.ok
-            expect(data.iptc.get('ObjectName')).to.equal('objectname')
+            expect(data.iptc.get('ObjectName')).to.equal('blueimp.net')
             done()
           },
           { meta: true }
         )
       ).to.be.ok
+    })
+
+    it('Should write Exif Orientation tag and replace image head', function (done) {
+      loadImage(
+        blobJPEG,
+        function (img, data) {
+          expect(data.imageHead).to.be.ok
+          expect(data.exif).to.be.ok
+          expect(data.exif.get('Orientation')).to.equal(6)
+          expect(data.iptc).to.be.ok
+          expect(data.iptc.get('ObjectName')).to.equal('blueimp.net')
+          // Reset Exif Orientation data:
+          loadImage.writeExifData(data.imageHead, data, 'Orientation', 1)
+          img.toBlob(function (blob) {
+            loadImage.replaceHead(blob, data.imageHead, function (newBlob) {
+              loadImage(
+                newBlob,
+                function (img, data) {
+                  expect(img.width).to.equal(40)
+                  expect(img.height).to.equal(60)
+                  expect(data.imageHead).to.be.ok
+                  expect(data.exif).to.be.ok
+                  expect(data.exif.get('Orientation')).to.equal(1)
+                  expect(data.iptc).to.be.ok
+                  expect(data.iptc.get('ObjectName')).to.equal('blueimp.net')
+                  done()
+                },
+                { meta: true }
+              )
+            })
+          }, 'image/jpeg')
+        },
+        { meta: true, orientation: true, canvas: true, minWidth: 40 }
+      )
     })
   })
 
@@ -991,14 +1256,16 @@
     it('Should fetch image URL as blob if meta option is true', function (done) {
       expect(
         loadImage(
-          imageUrlJPEG,
+          // IE does not allow XMLHttpRequest access to data URLs,
+          // so we use an ObjectURL instead of imageUrlJPEG directly:
+          loadImage.createObjectURL(blobJPEG),
           function (img, data) {
             expect(data).to.be.ok
             expect(data.imageHead).to.be.ok
             expect(data.exif).to.be.ok
             expect(data.exif.get('Orientation')).to.equal(6)
             expect(data.iptc).to.be.ok
-            expect(data.iptc.get('ObjectName')).to.equal('objectname')
+            expect(data.iptc.get('ObjectName')).to.equal('blueimp.net')
             done()
           },
           { meta: true }
@@ -1011,8 +1278,7 @@
         loadImage(imageUrlJPEG, function (img, data) {
           expect(data.imageHead).to.be.undefined
           expect(data.exif).to.be.undefined
-          expect(img.width).to.equal(2)
-          expect(img.height).to.equal(1)
+          expect(data.iptc).to.be.undefined
           done()
         })
       ).to.be.ok

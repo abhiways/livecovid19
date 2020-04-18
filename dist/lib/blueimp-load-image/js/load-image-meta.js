@@ -118,7 +118,7 @@
                   break
                 }
                 parsers = loadImage.metaDataParsers.jpeg[markerBytes]
-                if (parsers) {
+                if (parsers && !options.disableMetaDataParsers) {
                   for (i = 0; i < parsers.length; i += 1) {
                     parsers[i].call(
                       that,
@@ -162,9 +162,21 @@
     }
   }
 
-  // Determines if meta data should be loaded automatically:
-  loadImage.hasMetaOption = function (options) {
-    return options && options.meta
+  // Replaces the image head of a JPEG blob with the given one.
+  // Calls the callback with the new Blob:
+  loadImage.replaceHead = function (blob, head, callback) {
+    loadImage.parseMetaData(
+      blob,
+      function (data) {
+        callback(
+          new Blob(
+            [head, loadImage.blobSlice.call(blob, data.imageHead.byteLength)],
+            { type: 'image/jpeg' }
+          )
+        )
+      },
+      { maxMetaDataSize: 256, disableMetaDataParsers: true }
+    )
   }
 
   var originalTransform = loadImage.transform

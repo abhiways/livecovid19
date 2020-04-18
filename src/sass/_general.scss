@@ -105,3 +105,18 @@ svg {
   width: 100%;
   display: block;
 }
+
+#cover {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #141526;
+  z-index: 9999;
+  font-size: 30px;
+  text-align: center;
+  padding-top: 200px;
+  color: #fff;
+  font-family:tahoma;
+}

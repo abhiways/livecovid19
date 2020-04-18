@@ -224,6 +224,7 @@ if ($('.table').length > 0) {
     });
       });
     });
+    $("#cover").fadeOut(1750);
 })();
 
 function ApiData(stream_names, points_count, apidata) {
