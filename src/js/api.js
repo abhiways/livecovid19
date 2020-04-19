@@ -67,7 +67,7 @@ function statesDataUpdate(data, upType) {
         if(prop == "deaths") { var deaths = obj[prop];
           var newdeaths = obj.deltadeaths;
             if(upType == 1) {
-            deaths = "<span id='deaths-"+statecode+"'>"+deaths+" <i class='fa fa-caret-up color-red'></i>  <span id='newdeaths-"+statecode+"' class='rowsmalltxt'> "+newdeaths+"</span>";
+            deaths = "<span id='deaths-"+statecode+"'>"+deaths+"</span> <i class='fa fa-caret-up color-red'></i>  <span id='newdeaths-"+statecode+"' class='rowsmalltxt'> "+newdeaths+"</span>";
             } else {
               $("#deaths-"+statecode+"").html(""+deaths+"");
               $("#newdeaths-"+statecode+"").html(""+newdeaths+"");
