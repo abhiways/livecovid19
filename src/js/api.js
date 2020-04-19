@@ -76,7 +76,7 @@ function statesDataUpdate(data, upType) {
         if(prop == "recovered") { var recovered = obj[prop]; 
           var newrecovered = obj.deltarecovered;
             if(upType == 1) {
-            recovered = "<span id='recovered-"+statecode+"'>"+recovered+" <i class='fa fa-caret-up color-green'></i>  <span id='newrecovered-"+statecode+"' class='rowsmalltxt'> "+newrecovered+"</span>";
+            recovered = "<span id='recovered-"+statecode+"'>"+recovered+"</span> <i class='fa fa-caret-up color-green'></i>  <span id='newrecovered-"+statecode+"' class='rowsmalltxt'> "+newrecovered+"</span>";
             } else {
               $("#recovered-"+statecode+"").html(""+recovered+"");
               $("#newrecovered-"+statecode+"").html(""+newrecovered+"");
