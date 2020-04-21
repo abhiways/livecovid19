@@ -17,9 +17,16 @@ var messages = document.getElementById("messages");
   });
 
   socket.on("received", data => {
-        /* State Updates */
-        statesDataUpdate(data, 2);
-        /* State Updates Ends */
+    Confirmed.innerText = data.Confirmed;
+    Active.innerText = data.Active;
+    Recovered.innerText = data.Recovered;
+    Deceased.innerText = data.Deceased;
+    ConfirmedToday.innerText = data.ConfirmedToday;
+    RecoveredToday.innerText = data.RecoveredToday;
+    DeceasedToday.innerText = data.DeceasedToday;
+    /* State Updates */
+        statesDataUpdate(data.jsonData, 2);
+    /* State Updates Ends */
 });
 
 })();
@@ -33,111 +40,93 @@ Object.size = function(obj) {
   return size;
 };
 
-function statesDataUpdate(inpdaata, upType) {
-  var currdate = (new Date()).toString().split(' ').splice(1,3).join('');
-  for (var key in inpdaata) {
+function statesDataUpdate(data, upType) {
+   /* Add States Data */
+   for (var key in data.data.state_wise) {
     // skip loop if the property is from prototype
-    if (!inpdaata.hasOwnProperty(key)) continue;
+    if (!data.data.state_wise.hasOwnProperty(key)) continue;
 
-    var obj = inpdaata[key];
-    for (var data in obj) {
-      if(prop.fdate = currdate) { i = 0; } else { i++; }
-        if(i == 1) { break; }
-        Confirmed.innerText = data.data.Confirmed;
-        Active.innerText = data.data.Active;
-        Recovered.innerText = data.data.Recovered;
-        Deceased.innerText = data.data.Deceased;
-        ConfirmedToday.innerText = data.data.ConfirmedToday;
-        RecoveredToday.innerText = data.data.RecoveredToday;
-        DeceasedToday.innerText = data.data.DeceasedToday;
-        /* Add States Data */
-        for (var key in data.data.state_wise) {
-          // skip loop if the property is from prototype
-          if (!data.data.state_wise.hasOwnProperty(key)) continue;
-
-          var obj = data.data.state_wise[key];
-          for (var prop in obj) {
-              // skip loop if the property is from prototype
-              if (!obj.hasOwnProperty(prop)) continue;
-              // your code
-              if(prop == "state") { var state = obj[prop]; }
-              if(prop == "active") { var active = obj[prop]; }
-              var statecode = obj.statecode;
-              if(prop == "confirmed") { var confirmed = obj[prop];
-              if(prop == "deltaconfirmed") { var newconfirmed = obj[prop]; }
-                var newconfirmed = obj.deltaconfirmed; 
-                  if(upType == 1) {
-                  confirmed = "<span id='confirmed-"+statecode+"'>"+confirmed+"</span> <i class='fa fa-caret-up color-red'></i>  <span id='newconfirmed-"+statecode+"' class='rowsmalltxt'> "+newconfirmed+"</span>";
-                  } else {
-                    $("#confirmed-"+statecode+"").html(""+confirmed+"");
-                    $("#newconfirmed-"+statecode+"").html(""+newconfirmed+"");
-                  }
-              }
-              if(prop == "deaths") { var deaths = obj[prop];
-                var newdeaths = obj.deltadeaths;
-                  if(upType == 1) {
-                  deaths = "<span id='deaths-"+statecode+"'>"+deaths+"</span> <i class='fa fa-caret-up color-red'></i>  <span id='newdeaths-"+statecode+"' class='rowsmalltxt'> "+newdeaths+"</span>";
-                  } else {
-                    $("#deaths-"+statecode+"").html(""+deaths+"");
-                    $("#newdeaths-"+statecode+"").html(""+newdeaths+"");
-                  }
-              }
-              if(prop == "recovered") { var recovered = obj[prop]; 
-                var newrecovered = obj.deltarecovered;
-                  if(upType == 1) {
-                  recovered = "<span id='recovered-"+statecode+"'>"+recovered+"</span> <i class='fa fa-caret-up color-green'></i>  <span id='newrecovered-"+statecode+"' class='rowsmalltxt'> "+newrecovered+"</span>";
-                  } else {
-                    $("#recovered-"+statecode+"").html(""+recovered+"");
-                    $("#newrecovered-"+statecode+"").html(""+newrecovered+"");
-                }
-              }
-              if(prop == "lastupdatedtime") { 
-                if(upType == 1) {
-                var updated = "<span id='updated-"+statecode+"'>"+obj[prop]+"<span>"; 
-                } else {
-                  $("#updated-"+statecode+"").html(""+obj[prop]+"");
-                }
-              }
-              if(prop == "district") {
-                var distarr = new Array();
-                for (var keych in obj[prop]) {
-                  // skip loop if the property is from prototype
-                  if (!obj[prop].hasOwnProperty(keych)) continue;
-                  var objch = obj[prop][keych];
-                  for (var propch in objch) {
-                    if(propch == "confirmed") { 
-                      if(objch.delta.confirmed > 0) {
-                        if(upType == 1) {
-                          var confirmeddist = "<span id='confirmeddist-"+statecode+"'>"+objch[propch]+"</span> <i class='fa fa-caret-up color-red'></i>  <span id='confirmeddisttoday-"+statecode+"' class='rowsmalltxt'> "+objch.delta.confirmed+"</span>";
-                        } else {
-                          $("#confirmeddist-"+statecode+"").html(""+objch[propch]+"");
-                          $("#confirmeddisttoday-"+statecode+"").html(""+objch.delta.confirmed+"");
-                        }
-                      } else {
-                        if(upType == 1) {
-                          var confirmeddist = objch[propch];
-                        } else {
-                          $("#confirmeddist-"+statecode+"").html(""+objch[propch]+"");
-                        }
-                      }
-                      if(upType == 1) {
-                        var districtmarkuptd = "<tr><td></td><td>"+ keych +"</td><td>"+ confirmeddist +"</td></tr>";
-                        distarr.push(districtmarkuptd);
-                      }
-                    }
-                  }
-                }
-              }
-          }
-          if(upType == 1) {
-            var markup = "<tr class='header'><td></td><td>" + state + "</td><td class='color-orange'>" + confirmed +"<td>"+ active +"<td class='color-lime'>"+ deaths +"<td class='color-green'>"+ recovered +"<td>"+ updated +"</td></tr>"+distarr.join('');
-            $("#StateData tbody").append(markup);
-            $("#cover").fadeOut(1750);
-          }
-          distarr.length=0;
+    var obj = data.data.state_wise[key];
+    for (var prop in obj) {
+        // skip loop if the property is from prototype
+        if (!obj.hasOwnProperty(prop)) continue;
+        // your code
+        if(prop == "state") { var state = obj[prop]; }
+        if(prop == "active") { var active = obj[prop]; }
+        var statecode = obj.statecode;
+        if(prop == "confirmed") { var confirmed = obj[prop];
+        if(prop == "deltaconfirmed") { var newconfirmed = obj[prop]; }
+          var newconfirmed = obj.deltaconfirmed; 
+            if(upType == 1) {
+            confirmed = "<span id='confirmed-"+statecode+"'>"+confirmed+"</span> <i class='fa fa-caret-up color-red'></i>  <span id='newconfirmed-"+statecode+"' class='rowsmalltxt'> "+newconfirmed+"</span>";
+            } else {
+              $("#confirmed-"+statecode+"").html(""+confirmed+"");
+              $("#newconfirmed-"+statecode+"").html(""+newconfirmed+"");
+            }
         }
-      }
+        if(prop == "deaths") { var deaths = obj[prop];
+          var newdeaths = obj.deltadeaths;
+            if(upType == 1) {
+            deaths = "<span id='deaths-"+statecode+"'>"+deaths+"</span> <i class='fa fa-caret-up color-red'></i>  <span id='newdeaths-"+statecode+"' class='rowsmalltxt'> "+newdeaths+"</span>";
+            } else {
+              $("#deaths-"+statecode+"").html(""+deaths+"");
+              $("#newdeaths-"+statecode+"").html(""+newdeaths+"");
+            }
+        }
+        if(prop == "recovered") { var recovered = obj[prop]; 
+          var newrecovered = obj.deltarecovered;
+            if(upType == 1) {
+            recovered = "<span id='recovered-"+statecode+"'>"+recovered+"</span> <i class='fa fa-caret-up color-green'></i>  <span id='newrecovered-"+statecode+"' class='rowsmalltxt'> "+newrecovered+"</span>";
+            } else {
+              $("#recovered-"+statecode+"").html(""+recovered+"");
+              $("#newrecovered-"+statecode+"").html(""+newrecovered+"");
+          }
+        }
+        if(prop == "lastupdatedtime") { 
+          if(upType == 1) {
+          var updated = "<span id='updated-"+statecode+"'>"+obj[prop]+"<span>"; 
+          } else {
+            $("#updated-"+statecode+"").html(""+obj[prop]+"");
+          }
+        }
+        if(prop == "district") {
+          var distarr = new Array();
+          for (var keych in obj[prop]) {
+            // skip loop if the property is from prototype
+            if (!obj[prop].hasOwnProperty(keych)) continue;
+            var objch = obj[prop][keych];
+            for (var propch in objch) {
+              if(propch == "confirmed") { 
+                if(objch.delta.confirmed > 0) {
+                  if(upType == 1) {
+                    var confirmeddist = "<span id='confirmeddist-"+statecode+"'>"+objch[propch]+"</span> <i class='fa fa-caret-up color-red'></i>  <span id='confirmeddisttoday-"+statecode+"' class='rowsmalltxt'> "+objch.delta.confirmed+"</span>";
+                  } else {
+                    $("#confirmeddist-"+statecode+"").html(""+objch[propch]+"");
+                    $("#confirmeddisttoday-"+statecode+"").html(""+objch.delta.confirmed+"");
+                  }
+                } else {
+                  if(upType == 1) {
+                    var confirmeddist = objch[propch];
+                  } else {
+                    $("#confirmeddist-"+statecode+"").html(""+objch[propch]+"");
+                  }
+                }
+                if(upType == 1) {
+                  var districtmarkuptd = "<tr><td></td><td>"+ keych +"</td><td>"+ confirmeddist +"</td></tr>";
+                  distarr.push(districtmarkuptd);
+                }
+              }
+            }
+          }
+        }
     }
+    if(upType == 1) {
+      var markup = "<tr class='header'><td></td><td>" + state + "</td><td class='color-orange'>" + confirmed +"<td>"+ active +"<td class='color-lime'>"+ deaths +"<td class='color-green'>"+ recovered +"<td>"+ updated +"</td></tr>"+distarr.join('');
+      $("#StateData tbody").append(markup);
+      $("#cover").fadeOut(1750);
+    }
+    distarr.length=0;
+  }
   var ua = navigator.userAgent,
   event = (ua.match(/iPad/i)) ? "touchstart" : "click";
 if ($('.table').length > 0) {
@@ -159,6 +148,14 @@ if ($('.table').length > 0) {
     })
     .then(json => {
       json.map(data => {
+        Confirmed.innerText = data.data.total_values.confirmed;
+        ConfirmedToday.innerText = data.data.total_values.deltaconfirmed;
+        Active.innerText = data.data.total_values.active;
+        //ActiveToday.innerText = data.data.total_values.deltaconfirmed;
+        Recovered.innerText = data.data.total_values.recovered;
+        RecoveredToday.innerText = data.data.total_values.deltarecovered;
+        Deceased.innerText = data.data.total_values.deaths;
+        DeceasedToday.innerText = data.data.total_values.deltadeaths;
         statesDataUpdate(data, 1);
       });
     });
