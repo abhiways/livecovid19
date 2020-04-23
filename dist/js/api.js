@@ -180,7 +180,7 @@ if ($('.table').length > 0) {
               .margin({top: 0, bottom: 25, left: 0, right: 25})
               //.showLegend(false)
               .color([
-                  '#6294c9', '#59bc79', '#eb4034'
+                  '#6294c9', '#fc9803', '#59bc79', '#eb4034'
               ]);
 
           chart.legend.margin({top: 3});
@@ -199,7 +199,7 @@ if ($('.table').length > 0) {
 
         chart.brushExtent([new Date(day1mo.getTime()), new Date()])
 
-          var data1 = ApiData(['Confirmed', 'Recovered', 'Deceased'], pointlength, data.daily);
+          var data1 = ApiData(['Confirmed', 'Active', 'Recovered', 'Deceased'], pointlength, data.daily);
           data1[0].area = true;
           d3.select('#visits-chart svg')
               .datum(data1)
@@ -228,12 +228,13 @@ function ApiData(stream_names, points_count, apidata) {
           key: stream_names[i],
           values: data.map(function(d,j){ 
             var currentline = stream_names[i];
-            if(stream_names[i] == "Confirmed") { var currentline = "totalconfirmed"; }
-            if(stream_names[i] == "Recovered") { var currentline = "totalrecovered"; }
-            if(stream_names[i] == "Deceased") { var currentline = "totaldeceased"; }
+            if(stream_names[i] == "Confirmed") { var plot = apidata[j]["totalconfirmed"] }
+            if(stream_names[i] == "Active") { var plot = apidata[j]["totalconfirmed"] - apidata[j]["totalrecovered"] - apidata[j]["totaldeceased"] }
+            if(stream_names[i] == "Recovered") { var plot = apidata[j]["totalrecovered"] }
+            if(stream_names[i] == "Deceased") { var plot = apidata[j]["totaldeceased"] }
               return {
                   x: days_ago_date + d.x * day * day_per_point,
-                  y: apidata[j][currentline] //just a coefficientß
+                  y: plot //just a coefficientß
               }
           })
       };
