@@ -180,7 +180,7 @@ if ($('.table').length > 0) {
               .margin({top: 0, bottom: 25, left: 0, right: 25})
               //.showLegend(false)
               .color([
-                  '#6294c9', '#fc9803', '#59bc79', '#eb4034'
+                  '#6294c9', '#fc9803', '#48f702', '#fc030b'
               ]);
 
           chart.legend.margin({top: 3});
