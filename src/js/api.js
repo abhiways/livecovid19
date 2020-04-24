@@ -141,7 +141,7 @@ if ($('.table').length > 0) {
 
  // fetching iniatial basic stats from the database
 (function() {
-  fetch("https://www.livecovid19.org:5000/stats")
+  fetch("https://www.livecovid19.org/api/stats")
     .then(data => {
       return data.json();
     })
@@ -162,7 +162,7 @@ if ($('.table').length > 0) {
 
  // fetching feeds from the database
  (function() {
-  fetch("https://www.livecovid19.org:5000/feeds")
+  fetch("https://www.livecovid19.org/api/feeds")
     .then(data => {
       return data.json();
     })
@@ -181,7 +181,7 @@ if ($('.table').length > 0) {
 
 // fetching iniatial daily stats from the database
 (function() {
-  fetch("https://www.livecovid19.org:5000/dailystats")
+  fetch("https://www.livecovid19.org/api/dailystats")
     .then(data => {
       return data.json();
     })
