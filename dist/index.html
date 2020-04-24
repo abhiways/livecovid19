@@ -64,7 +64,7 @@
         </header>        <div class="content container">
         <h2 class="page-title">COVID-19 TRACKER <small>Crowdsourced Initiative By InverseSoft</small></h2>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-8">
                 <section class="widget">
                     <header>
                         <h4>
@@ -140,12 +140,12 @@
                     </div>
                 </section>
             </div>
-            <!-- <div class="col-lg-4"> -->
-                <!-- <section class="widget large">
+            <div class="col-lg-4">
+                 <section class="widget large">
                     <header>
                         <h4>
-                            Feed
-                            <span class="label label-success">412</span>
+                            Live Feeds
+                            <!-- <span class="label label-success">412</span> -->
                         </h4>
                         <div class="actions">
                             <button class="btn btn-transparent btn-xs">Show All <i class="fa fa-arrow-down"></i></button>
@@ -155,84 +155,7 @@
                         <div id="feed" class="feed">
                             <div class="wrapper">
                                 <div class="vertical-line"></div>
-                                <section class="feed-item">
-                                    <div class="icon pull-left">
-                                        <i class="fa fa-comment"></i>
-                                    </div>
-                                    <div class="feed-item-body">
-                                        <div class="text">
-                                            <a href="#">John Doe</a> commented on <a href="#">What Makes Good Code Good</a>.
-                                        </div>
-                                        <div class="time pull-left">
-                                            3 h
-                                        </div>
-                                    </div>
-                                </section>
-                                <section class="feed-item">
-                                    <div class="icon pull-left">
-                                        <i class="fa fa-check color-green"></i>
-                                    </div>
-                                    <div class="feed-item-body">
-                                        <div class="text">
-                                            <a href="#">Merge request #42</a> has been approved by <a href="#">Jessica Lori</a>.
-                                        </div>
-                                        <div class="time pull-left">
-                                            10 h
-                                        </div>
-                                    </div>
-                                </section>
-                                <section class="feed-item">
-                                    <div class="icon pull-left">
-                                        <img src="img/14.png" class="img-circle" alt="">
-                                    </div>
-                                    <div class="feed-item-body">
-                                        <div class="text">
-                                            New user <a href="#">Greg Wilson</a> registered.
-                                        </div>
-                                        <div class="time pull-left">
-                                            Today
-                                        </div>
-                                    </div>
-                                </section>
-                                <section class="feed-item">
-                                    <div class="icon pull-left">
-                                        <i class="fa fa-bolt color-orange"></i>
-                                    </div>
-                                    <div class="feed-item-body">
-                                        <div class="text">
-                                            Server fail level raises above normal. <a href="#">See logs</a> for details.
-                                        </div>
-                                        <div class="time pull-left">
-                                            Yesterday
-                                        </div>
-                                    </div>
-                                </section>
-                                <section class="feed-item">
-                                    <div class="icon pull-left">
-                                        <i class="fa fa-database"></i>
-                                    </div>
-                                    <div class="feed-item-body">
-                                        <div class="text">
-                                            <a href="#">Database usage report</a> is ready.
-                                        </div>
-                                        <div class="time pull-left">
-                                            Yesterday
-                                        </div>
-                                    </div>
-                                </section>
-                                <section class="feed-item">
-                                    <div class="icon pull-left">
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </div>
-                                    <div class="feed-item-body">
-                                        <div class="text">
-                                            <a href="#">Order #233985</a> needs additional processing.
-                                        </div>
-                                        <div class="time pull-left">
-                                            Wednesday
-                                        </div>
-                                    </div>
-                                </section>
+                                <span id="prepFeeds"></span>
                                 <section class="feed-item">
                                     <div class="icon pull-left">
                                         <i class="fa fa-arrow-down"></i>
@@ -246,82 +169,83 @@
                             </div>
                         </div>
                     </div>
-                </section> -->
-                <!-- <section class="widget widget-tabs">
+                </section>
+                <section class="widget widget-tabs">
                     <header>
                         <ul class="nav nav-tabs">
                             <li class="active">
-                                <a href="#stats" data-toggle="tab">Users</a>
+                                <a href="#stats" data-toggle="tab">Insights</a>
                             </li>
                             <li>
-                                <a href="#report" data-toggle="tab">Favorites</a>
+                                <a href="#report" data-toggle="tab">Helpline Numbers</a>
                             </li>
                             <li>
-                                <a href="#dropdown1" data-toggle="tab">Commenters</a>
+                                <a href="#dropdown1" data-toggle="tab">FAQ's</a>
                             </li>
                         </ul>
                     </header>
                     <div class="body tab-content">
                         <div id="stats" class="tab-pane active clearfix">
-                            <h5 class="tab-header"><span class="label label-primary"><i class="fa fa-facebook"></i></span> Last logged-in users</h5>
+                            <h5 class="tab-header"><span class="label label-primary"><i class="fa fa-fire"></i></span> Maharashtra is a worst affected state</h5>
                             <ul class="news-list">
                                 <li>
-                                    <img src="img/1.png" alt="" class="pull-left img-circle"/>
                                     <div class="news-item-info">
-                                        <div class="name"><a href="#">Finees Lund</a></div>
-                                        <div class="position">Product Designer</div>
-                                        <div class="time">Last logged-in: Mar 20, 18:46</div>
+                                        <div class="name"><a href="#">8.7 Days</a></div>
+                                        <div class="position">Case Doubling Rate</div>
+                                        <div class="time">Total cases in India are doubling every 8.7 Days</div>
                                     </div>
                                 </li>
                                 <li>
-                                    <img src="img/3.png" alt="" class="pull-left img-circle"/>
                                     <div class="news-item-info">
-                                        <div class="name"><a href="#">Erebus Novak</a></div>
-                                        <div class="position">Software Engineer</div>
-                                        <div class="time">Last logged-in: Mar 23, 9:02</div>
+                                        <div class="name"><a href="#">6.2 Days</a></div>
+                                        <div class="position">Recovery Doubling Rate</div>
+                                        <div class="time">Total recoveries in India are doubling every 6.2 Days.</div>
                                     </div>
                                 </li>
                                 <li>
-                                    <img src="img/2.png" alt="" class="pull-left img-circle"/>
                                     <div class="news-item-info">
-                                        <div class="name"><a href="#">Leopoldo Reier</a></div>
-                                        <div class="position">Chief Officer</div>
-                                        <div class="time">Last logged-in: Jun 6, 15:34</div>
+                                        <div class="name"><a href="#">In 44 Days</a></div>
+                                        <div class="position">1 to 100 Cases Reproted</div>
+                                        <div class="time">Most of the cases were foreign travellers.</div>
                                     </div>
                                 </li>
                                 <li>
-                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
-                                    <div class="news-item-info">
-                                        <div class="name"><a href="#">Frans Garey</a></div>
-                                        <div class="position">Financial Assistant</div>
-                                        <div class="time">Last logged-in: Jun 8, 17:20</div>
+                                   <div class="news-item-info">
+                                        <div class="name"><a href="#">In Next 14 Days</a></div>
+                                        <div class="position">100 to 1,000</div>
+                                        <div class="time">Most of the cases are from Nijamuddin Cluster.</div>
                                     </div>
                                 </li>
                                 <li>
-                                    <img src="img/14.png" alt="" class="pull-left img-circle"/>
                                     <div class="news-item-info">
-                                        <div class="name"><a href="#">Jessica Johnsson</a></div>
-                                        <div class="position">Sales Manager</div>
-                                        <div class="time">Last logged-in: Jun 8, 9:13</div>
+                                        <div class="name"><a href="#">In next 15 Days</a></div>
+                                        <div class="position">1,000 to 10,000 Cases Reproted</div>
+                                        <div class="time">39% Reported cases are contacts of Nijamuddin Cluster.</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">In next 9 Days</a></div>
+                                        <div class="position">10,000 to 20,000 Cases Reproted</div>
+                                        <div class="time">New Hotspots are Emerged in Maharashtra and Tamilnadu.</div>
                                     </div>
                                 </li>
                             </ul>
                         </div>
                         <div id="report" class="tab-pane">
-                            <h5 class="tab-header"><i class="fa fa-star"></i> Popular contacts</h5>
+                            <h5 class="tab-header"><i class="fa fa-star"></i> 24/7 Helpline Numbers for COVID-19</h5>
                             <ul class="news-list news-list-no-hover">
                                 <li>
-                                    <img src="img/14.png" alt="" class="pull-left img-circle"/>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
                                     <div class="news-item-info">
-                                        <div class="name"><a href="#">Jessica Johnsson</a></div>
+                                        <div class="name"><a href="#">Andhra Pradesh</a></div>
                                         <div class="options">
-                                            <button class="btn btn-xs btn-success">
+                                            <a href="tel:+918662410978" class="btn btn-xs btn-success">
                                                 <i class="fa fa-phone"></i>
                                                 Call
-                                            </button>
+                                            </a>
                                             <button class="btn btn-xs btn-warning">
-                                                <i class="fa fa-envelope-o"></i>
-                                                Message
+                                                0866-2410978
                                             </button>
                                         </div>
                                     </div>
@@ -329,63 +253,269 @@
                                 <li>
                                     <img src="img/13.png" alt="" class="pull-left img-circle"/>
                                     <div class="news-item-info">
-                                        <div class="name"><a href="#">Frans Garey</a></div>
+                                        <div class="name"><a href="#">Arunachal Pradesh</a></div>
                                         <div class="options">
-                                            <button class="btn btn-xs btn-success">
+                                            <a href="tel:+919436055743" class="btn btn-xs btn-success">
                                                 <i class="fa fa-phone"></i>
                                                 Call
-                                            </button>
+                                            </a>
                                             <button class="btn btn-xs btn-warning">
-                                                <i class="fa fa-envelope-o"></i>
-                                                Message
+                                                9436055743
                                             </button>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <img src="img/3.png" alt="" class="pull-left img-circle"/>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
                                     <div class="news-item-info">
-                                        <div class="name"><a href="#">Erebus Novak</a></div>
+                                        <div class="name"><a href="#">Assam</a></div>
                                         <div class="options">
-                                            <button class="btn btn-xs btn-success">
+                                            <a href="tel:+916913347770" class="btn btn-xs btn-success">
                                                 <i class="fa fa-phone"></i>
                                                 Call
-                                            </button>
+                                            </a>
                                             <button class="btn btn-xs btn-warning">
-                                                <i class="fa fa-envelope-o"></i>
-                                                Message
+                                                6913347770
                                             </button>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <img src="img/2.png" alt="" class="pull-left img-circle"/>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
                                     <div class="news-item-info">
-                                        <div class="name"><a href="#">Leopoldo Reier</a></div>
+                                        <div class="name"><a href="#">Bihar / Chhattisgarh / Goa / Gujarat / UK</a></div>
                                         <div class="options">
-                                            <button class="btn btn-xs btn-success">
+                                            <a href="tel:104" class="btn btn-xs btn-success">
                                                 <i class="fa fa-phone"></i>
                                                 Call
-                                            </button>
+                                            </a>
                                             <button class="btn btn-xs btn-warning">
-                                                <i class="fa fa-envelope-o"></i>
-                                                Message
+                                                104
                                             </button>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <img src="img/1.png" alt="" class="pull-left img-circle"/>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
                                     <div class="news-item-info">
-                                        <div class="name"><a href="#">Finees Lund</a></div>
+                                        <div class="name"><a href="#">Himachal Pradesh / Jharkhand / Karnataka</a></div>
                                         <div class="options">
-                                            <button class="btn btn-xs btn-success">
+                                            <a href="tel:104" class="btn btn-xs btn-success">
                                                 <i class="fa fa-phone"></i>
                                                 Call
-                                            </button>
+                                            </a>
                                             <button class="btn btn-xs btn-warning">
-                                                <i class="fa fa-envelope-o"></i>
-                                                Message
+                                                104
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Madhya Pradesh / Punjab / Sikkim / Telengana</a></div>
+                                        <div class="options">
+                                            <a href="tel:104" class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </a>
+                                            <button class="btn btn-xs btn-warning">
+                                                104
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Haryana</a></div>
+                                        <div class="options">
+                                            <a href="tel:+918558893911" class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </a>
+                                            <button class="btn btn-xs btn-warning">
+                                                8558893911
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Kerala</a></div>
+                                        <div class="options">
+                                            <a href="tel:+910471-2552056" class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </a>
+                                            <button class="btn btn-xs btn-warning">
+                                                04712552056
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Maharashtra</a></div>
+                                        <div class="options">
+                                            <a href="tel:+912026127394" class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </a>
+                                            <button class="btn btn-xs btn-warning">
+                                                020-26127394
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Manipur</a></div>
+                                        <div class="options">
+                                            <a href="tel:+913852411668" class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </a>
+                                            <button class="btn btn-xs btn-warning">
+                                                3852411668
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Meghalaya</a></div>
+                                        <div class="options">
+                                            <a href="tel:108" class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </a>
+                                            <button class="btn btn-xs btn-warning">
+                                                108
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Mizoram</a></div>
+                                        <div class="options">
+                                            <a href="tel:102" class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </a>
+                                            <button class="btn btn-xs btn-warning">
+                                                102
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Nagaland</a></div>
+                                        <div class="options">
+                                            <a href="tel:+917005539653" class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </a>
+                                            <button class="btn btn-xs btn-warning">
+                                                7005539653
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Odisha</a></div>
+                                        <div class="options">
+                                            <a href="tel:+919439994859" class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </a>
+                                            <button class="btn btn-xs btn-warning">
+                                                9439994859
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Rajasthan</a></div>
+                                        <div class="options">
+                                            <a href="tel:+911412225624" class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </a>
+                                            <button class="btn btn-xs btn-warning">
+                                                0141-2225624
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Tamil Nadu</a></div>
+                                        <div class="options">
+                                            <a href="tel:+914429510500" class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </a>
+                                            <button class="btn btn-xs btn-warning">
+                                                044-29510500
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Tripura</a></div>
+                                        <div class="options">
+                                            <a href="tel:+913812315879" class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </a>
+                                            <button class="btn btn-xs btn-warning">
+                                                0381-2315879
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">Uttar Pradesh</a></div>
+                                        <div class="options">
+                                            <a href="tel:18001805145" class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </a>
+                                            <button class="btn btn-xs btn-warning">
+                                                18001805145
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
+                                    <div class="news-item-info">
+                                        <div class="name"><a href="#">West Bengal</a></div>
+                                        <div class="options">
+                                            <a href="tel:1800313444222" class="btn btn-xs btn-success">
+                                                <i class="fa fa-phone"></i>
+                                                Call
+                                            </a>
+                                            <button class="btn btn-xs btn-warning">
+                                                1800313444222, 03323412600
                                             </button>
                                         </div>
                                     </div>
@@ -393,62 +523,57 @@
                             </ul>
                         </div>
                         <div id="dropdown1" class="tab-pane">
-                            <h5 class="tab-header"><i class="fa fa-comments"></i> Top Commenters</h5>
+                            <h5 class="tab-header"><i class="fa fa-comments"></i> Frequently Asked Questions</h5>
                             <ul class="news-list">
                                 <li>
                                     <img src="img/13.png" alt="" class="pull-left img-circle"/>
                                     <div class="news-item-info">
-                                        <div class="name"><a href="#">Frans Garey</a></div>
+                                        <div class="name"><a href="#">Who are you?</a></div>
                                         <div class="comment">
-                                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
-                                            sed quia
+                                            We are a team working for InverseSoft based in Pune.
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <img src="img/1.png" alt="" class="pull-left img-circle"/>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
                                     <div class="news-item-info">
-                                        <div class="name"><a href="#">Finees Lund</a></div>
+                                        <div class="name"><a href="#">Is your data is Official?</a></div>
                                         <div class="comment">
-                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                                            eu fugiat.
+                                            Our Data is not official but its based on reports updated via various media outlets throughout the country.
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <img src="img/14.png" alt="" class="pull-left img-circle"/>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
                                     <div class="news-item-info">
-                                        <div class="name"><a href="#">Jessica Johnsson</a></div>
+                                        <div class="name"><a href="#">How often you update data?</a></div>
                                         <div class="comment">
-                                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                            deserunt.
+                                            We have linked this dashboard to LIVE socket server so as soon as data is added to our database its instantly updated on page.
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <img src="img/3.png" alt="" class="pull-left img-circle"/>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
                                     <div class="news-item-info">
-                                        <div class="name"><a href="#">Erebus Novak</a></div>
+                                        <div class="name"><a href="#">Can I work with you?</a></div>
                                         <div class="comment">
-                                            Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium
-                                            doloremque.
+                                            Yes you can, email us at livecovid19org@gmail.com, If you are a developer join us at GitHub Link at Footer.
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <img src="img/2.png" alt="" class="pull-left img-circle"/>
+                                    <img src="img/13.png" alt="" class="pull-left img-circle"/>
                                     <div class="news-item-info">
-                                        <div class="name"><a href="#">Leopoldo Reier</a></div>
+                                        <div class="name"><a href="#">Is your data 100% Accurate?</a></div>
                                         <div class="comment">
-                                            Laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis
-                                            et quasi.
+                                            Our data is pulled from various API's and Media outlets as well us reporters across the nation. Always verify data with <a href="https://www.mohfw.gov.in/" target="_blank">MoHFW</a>
                                         </div>
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                </section> -->
+                </section>
                 <!-- <section class="widget">
                     <header>
                         <h4>

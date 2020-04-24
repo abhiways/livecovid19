@@ -139,10 +139,9 @@ if ($('.table').length > 0) {
 /******** */
  }
 
-
-// fetching iniatial basic stats from the database
+ // fetching iniatial basic stats from the database
 (function() {
-  fetch("https://www.livecovid19.org/api/stats")
+  fetch("https://www.livecovid19.org:5000/stats")
     .then(data => {
       return data.json();
     })
@@ -161,9 +160,28 @@ if ($('.table').length > 0) {
     });
 })();
 
+ // fetching feeds from the database
+ (function() {
+  fetch("https://www.livecovid19.org:5000/feeds")
+    .then(data => {
+      return data.json();
+    })
+    .then(json => {
+      json.map(data => {
+          if(data.district != 'Unknown') { if(data.district != "Italians") { var prefix = data.district+" district ";} else { var prefix = data.district; } } else { var prefix = ""; }
+          if(data.action == 'death') { var cicon = "fa fa-bolt color-red"; var posfix = "."; } else { if(data.val > 1) { var posfix = "cases."; } else { var posfix = "case."; } }
+          if(data.action == 'confirmed') { var cicon = "fa fa-bed color-orange";  }
+          if(data.action == 'recovered') { var cicon = "fa fa-check color-green"; }
+            var txt = prefix+" ("+data.state+") has reported "+data.val+" "+data.action+" "+posfix;
+            var newHTML = "<section class='feed-item'><div class='icon pull-left'><i class='"+cicon+"'></i></div><div class='feed-item-body'><div class='text'>"+txt+"</div><div class='time pull-left timeago' title='"+data.time+"'></div></div></section>";
+            $('#prepFeeds').prepend(newHTML);
+      });
+    });
+})();
+
 // fetching iniatial daily stats from the database
 (function() {
-  fetch("https://www.livecovid19.org/api/dailystats")
+  fetch("https://www.livecovid19.org:5000/dailystats")
     .then(data => {
       return data.json();
     })
