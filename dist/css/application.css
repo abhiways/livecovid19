@@ -21149,9 +21149,6 @@ a.text-gray-lighter:focus {
 .widget.large {
   height: 315px;
 }
-.widget.largefeeds {
-  height:635px;
-}
 
 .widget.large .body {
   height: 280px;

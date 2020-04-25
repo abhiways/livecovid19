@@ -172,7 +172,7 @@ if ($('.table').length > 0) {
           if(data.action == 'death') { var cicon = "fa fa-bolt color-red"; var posfix = "."; } else { if(data.val > 1) { var posfix = "cases."; } else { var posfix = "case."; } }
           if(data.action == 'confirmed') { var cicon = "fa fa-bed color-orange";  }
           if(data.action == 'recovered') { var cicon = "fa fa-check color-green"; }
-            var txt = prefix+" ("+data.state+") has reported "+data.val+" "+data.action+" "+posfix;
+            var txt = "[ "+data.state+" ] "+prefix+" has reported "+data.val+" "+data.action+" "+posfix;
             var newHTML = "<section class='feed-item'><div class='icon pull-left'><i class='"+cicon+"'></i></div><div class='feed-item-body'><div class='text'>"+txt+"</div><div class='time pull-left timeago' title='"+data.time+"'></div></div></section>";
             $('#prepFeeds').prepend(newHTML);
       });
