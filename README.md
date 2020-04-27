@@ -41,7 +41,7 @@ This command will watch for changes in `/src` and recompile handlebars' template
 This command will serve `/dist` folder and you can watch local version of website in your browser.
 `http://127.0.0.1:8080` OR `http://localhost:8080`
 
-Note: socket polling will not work on your local vesion unless you edit `src/js/socket.js` file and find and replace `/api/socket.io` with `/scoket.io`
+Note: socket polling will not work on your local environment.
 
 ## Technologies
 
