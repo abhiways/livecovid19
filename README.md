@@ -32,9 +32,7 @@ This commant will install grunt task runner globally.
 #### 4. Run `grunt`
 
 This command will build the app from the source files (`/src`) into the output
-`/dist` folder. Then open `dist/index.html` in your browser.
-
-Or you can run http server as explained bellow
+`/dist` folder. 
 
 #### 5. Run `grunt watch`
 This command will watch for changes in `/src` and recompile handlebars' templates & scss styles on the fly into html & css accordingly.
