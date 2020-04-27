@@ -170,12 +170,14 @@ if ($('.table').length > 0) {
     .then(json => {
       json.map(data => {
           if(data.district != 'Unknown') { if(data.district != "Italians") { var prefix = data.district+" district ";} else { var prefix = data.district; } } else { var prefix = ""; }
-          if(data.action == 'death') { var cicon = "fa fa-bolt color-red"; var posfix = "."; } else { if(data.val > 1) { var posfix = "cases."; } else { var posfix = "case."; } }
-          if(data.action == 'confirmed') { var cicon = "fa fa-bed color-orange";  }
-          if(data.action == 'recovered') { var cicon = "fa fa-check color-green"; }
-            var txt = "[ "+data.state+" ] "+prefix+" has reported "+data.val+" "+data.action+" "+posfix;
+          if(data.action == 'death') { var cicon = "fa fa-bolt color-red";
+           if(data.val > 1) { var act = "deaths."; } else { var act = "death."; }  var posfix = "";
+          } else { if(data.val > 1) { var posfix = "cases."; } else { var posfix = "case."; } }
+          if(data.action == 'confirmed') { var act = "confirmed"; var cicon = "fa fa-bed color-orange";  }
+          if(data.action == 'recovered') { var act = "recovered"; var cicon = "fa fa-check color-green"; }
+            var txt = "[ "+data.state+" ] "+prefix+" has reported "+data.val+" "+act+" "+posfix;
             var updt = new Date(data.time*1000);
-            var newHTML = "<section class='feed-item'><div class='icon pull-left'><i class='"+cicon+"'></i></div><div class='feed-item-body'><div class='text'>"+txt+"</div><div class='time pull-left timeago' title='"+data.time+"'>"+updt+"</div></div></section>";
+            var newHTML = "<section class='feed-item'><div class='icon pull-left'><i class='"+cicon+"'></i></div><div class='feed-item-body'><div class='text'>"+txt+"</div><div class='time pull-left timeago' title='"+data.time+"'>"+updt.toLocaleString()+"</div></div></section>";
             $('#prepFeeds').prepend(newHTML);
       });
     });
