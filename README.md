@@ -47,10 +47,11 @@ This command will serve `/dist` folder and you can watch local version of websit
 
 ## Technologies
 
-1. Node.js
-2. Socket.io
-3. Bootstrap & SCSS 
-4. jQuery
+- React
+- Node.js
+- Socket.io
+- Bootstrap & SCSS 
+- jQuery
 
 
 ## Support
