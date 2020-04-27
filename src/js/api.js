@@ -122,7 +122,7 @@ function statesDataUpdate(data, upType) {
         }
     }
     if(upType == 1) {
-      var markup = "<tr class='header'><td></td><td>" + state + "</td><td class='color-orange'>" + confirmed +"<td>"+ active +"<td class='color-lime'>"+ deaths +"<td class='color-green'>"+ recovered +"<td>"+ updated +"</td></tr>"+distarr.join('');
+      var markup = "<tr class='header'><td></td><td>" + state + "</td><td class='color-orange'>" + confirmed +"<td>"+ active +"<td class='color-lime'>"+ deaths +"<td class='color-green'>"+ recovered +"<td style='display:none;'>"+ updated +"</td></tr>"+distarr.join('');
       $("#StateData tbody").append(markup);
       $("#cover").fadeOut(1750);
     }
