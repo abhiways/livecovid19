@@ -31,6 +31,7 @@ var messages = document.getElementById("messages");
 
 })();
 
+
 // get Size of JSON Object
 Object.size = function(obj) {
   var size = 0, key;
@@ -190,11 +191,13 @@ if ($('.table').length > 0) {
       json.map(data => {
         var pointlength = data.daily.length;
         var day1mo = new Date();
+        // Line CHart //
         day1mo.setDate(day1mo.getDate()-30);
         nv.addGraph(function() {
           var maxf = data.daily[Object.keys(data.daily)[Object.keys(data.daily).length-1]];
           var maxy = Math.ceil(maxf.totalconfirmed/1000)*1000;
-          var chart = nv.models.lineWithFocusChart().yDomain([0,maxy]).rightAlignYAxis(true)
+          //var chart = nv.models.lineWithFocusChart().yDomain([0,maxy]).rightAlignYAxis(true)
+          var chart = nv.models.lineWithFocusChart().rightAlignYAxis(true)
               .useInteractiveGuideline(true)
               .margin({top: 0, bottom: 25, left: 0, right: 25})
               //.showLegend(false)
@@ -215,6 +218,10 @@ if ($('.table').length > 0) {
           chart.x2Axis
               .showMaxMin(false)
               .tickFormat(function(d) { return d3.time.format('%b %d')(new Date(d)) });
+          
+         // chart.yScale(d3.scale.log());
+          chart.forceY([1,50000]);
+         // chart.yScale( d3.scale.log().base(4) );
 
         chart.brushExtent([new Date(day1mo.getTime()), new Date()])
 
@@ -229,6 +236,38 @@ if ($('.table').length > 0) {
 
           return chart;
         });
+        // Line CHart Ends //
+        // Bar Charts //
+        nv.addGraph(function() {
+          var maxf = data.daily[Object.keys(data.daily)[Object.keys(data.daily).length-1]];
+          var maxy = Math.ceil(maxf.dailyconfirmed/1000)*1000;
+          var chart = nv.models.multiBarChart()
+            .yDomain([0,maxy])
+            .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
+            .rotateLabels(0)      //Angle to rotate x-axis labels.
+            .showControls(true)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
+            .groupSpacing(0.1)    //Distance between each group of bars.
+            .color([
+              '#6294c9', '#fc9803', '#48f702', '#fc030b'
+          ]);
+      
+          chart.xAxis
+             // .tickFormat(d3.format(',f'));
+             .tickFormat(function(d) { return d3.time.format('%b %d')(new Date(d)) });
+      
+          chart.yAxis
+              .showMaxMin(false)
+              .tickFormat(d3.format('s'));
+      
+          d3.select('#prediction-chart svg')
+              .datum(dailytrends(['Confirmed', 'Active', 'Recovered', 'Deceased'], pointlength, data.daily))
+              .call(chart);
+      
+          nv.utils.windowResize(chart.update);
+      
+          return chart;
+      });
+        // Bar Chart Ends
       });
     });
 })();
@@ -258,4 +297,31 @@ function ApiData(stream_names, points_count, apidata) {
           })
       };
   });
+}
+
+function dailytrends(stream_names, points_count, apidata) {
+  var now = new Date().getTime(),
+  day = 1000 * 60 * 60 * 24, //milliseconds
+  days_ago_count = 60,
+  days_ago = points_count * day,
+  days_ago_date = now - days_ago,
+  points_count = points_count || 45, //less for better performance
+  day_per_point = points_count / points_count;
+  //alert(JSON.stringify(apidata[0]));
+return stream_layers(stream_names.length, points_count, .1).map(function(data, i) {
+  return {
+      key: stream_names[i],
+      values: data.map(function(d,j){ 
+        var currentline = stream_names[i];
+        if(stream_names[i] == "Confirmed") { var plot = apidata[j]["dailyconfirmed"] }
+        if(stream_names[i] == "Active") { var plot = apidata[j]["dailyconfirmed"] - apidata[j]["dailyrecovered"] - apidata[j]["dailydeceased"] }
+        if(stream_names[i] == "Recovered") { var plot = apidata[j]["dailyrecovered"] }
+        if(stream_names[i] == "Deceased") { var plot = apidata[j]["dailydeceased"] }
+          return {
+              x: days_ago_date + d.x * day * day_per_point,
+              y: plot //just a coefficientß
+          }
+      })
+  };
+});
 }
