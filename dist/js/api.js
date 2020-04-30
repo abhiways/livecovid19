@@ -421,6 +421,7 @@ return stream_layers(stream_names.length, points_count, .1).map(function(data, i
 function MapChange(state) {
   $('#stateMap').html(state);
   $('#stateMapDB').attr('href', 'https://www.livecovid19.org/apic/datamap.php?s='+state.toLowerCase());
+  var urlstate = state.replace(/ /g,'');
 const _app = {
   map: {
     init: {
@@ -467,7 +468,7 @@ const _app = {
   },
   data: {
     /* URL to GeoJSON */
-    'shape-source':'https://www.livecovid19.org/apic/shape/'+state.toLowerCase()+'/district/'+state.toLowerCase()+'_district.json',
+    'shape-source':'https://www.livecovid19.org/apic/shape/'+urlstate.toLowerCase()+'/district/'+urlstate.toLowerCase()+'_district.json',
   
     'table-source': 'https://www.livecovid19.org/apic/datamap.php?s='+state.toLowerCase()+'',
     /* Matching function will match the shape feature to the table row if it returns true */
