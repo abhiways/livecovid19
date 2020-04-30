@@ -146,6 +146,11 @@ $(function(){
             setTimeout(timeAgo, 60000);
         
         })();
+        $(function () {
+            $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+                window.dispatchEvent(new Event('resize'));
+            });
+        });
     }
 
     pageLoad();

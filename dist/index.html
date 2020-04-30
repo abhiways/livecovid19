@@ -65,65 +65,71 @@
         <h2 class="page-title">COVID-19 TRACKER <small>OpenSource &amp; Crowdsourced By InverseSoft</small></h2>
         <div class="row">
             <div class="col-lg-8">
-                <section class="widget">
+                <section class="widget widget-tabs">
                     <header>
-                        <h4>
-                            <img src="img/live.gif" alt="livecovid19.org" height="15"/> LIVE INDIA
-                            <small>
-                                Trends.
-                            </small>
-                        </h4>
-                        <div class="widget-controls">
-                            <a title="Options" href="#"><i class="glyphicon glyphicon-cog"></i></a>
-                            <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
-                            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
-                            <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
-                        </div>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#totaltrends" data-toggle="tab">Total Trends</a>
+                            </li>
+                            <li>
+                                <a href="#dailytrends" data-toggle="tab">Daily Trends</a>
+                            </li>
+                            <li>
+                                <a href="#predictionchart" data-toggle="tab">Forecast</a>
+                            </li>
+                        </ul>
                     </header>
-                    <div class="body no-margin">
-                        <div id="visits-chart" class="chart visits-chart">
-                            <svg></svg>
+                    <div class="body tab-content" style="overflow:hidden;">
+                         <div id="totaltrends" class="tab-pane active clearfix">
+                            <h4>
+                                <img src="img/live.gif" alt="livecovid19.org" height="15"/> LIVE INDIA
+                                <small>
+                                    Trends.
+                                </small>
+                            </h4>
+                            <div id="visits-chart" class="chart visits-chart">
+                                <svg></svg>
+                            </div>
+                         </div>
+                        <div id="dailytrends" class="tab-pane">
+                            <h4>
+                               DAILY
+                                <small>
+                                    Trends.
+                                </small>
+                            </h4>
+                            <div id="prediction-chart" class="chart visits-chart">
+                                 <svg></svg>
+                            </div>
+                        </div>
+                        <div id="predictionchart" class="tab-pane">
+                            <h4>
+                               PROJECTION
+                                <small>
+                                    (Based on Tweaked Mathematical Model of IIM)
+                                </small>
+                            </h4>
+                            <div id="chartdiv"></div>
                         </div>
                         <div class="visits-info well well-sm">
                             <div class="row">
-                                <div class="col-sm-3 col-xs-6">
+                                 <div class="col-sm-3 col-xs-6">
                                     <div class="key"><i class="fa fa-users"></i> Confirmed</div>
-                                    <div class="value"><span id="Confirmed">0</span> <i class="fa fa-caret-up color-red"></i> <span id="ConfirmedToday" class="changeData"></span></div>
+                                        <div class="value"><span id="Confirmed">0</span> <i class="fa fa-caret-up color-red"></i> <span id="ConfirmedToday" class="changeData"></span></div>
                                 </div>
-                                <div class="col-sm-3 col-xs-6">
-                                    <div class="key"><i class="fa fa-bed"></i> Active</div>
-                                    <div class="value"><span id="Active">0</span> </div>
-                                </div>
-                                <div class="col-sm-3 col-xs-6">
-                                    <div class="key"><i class="fa fa-plus-square"></i> Recovered</div>
-                                    <div class="value"><span id="Recovered">0</span> <i class="fa fa-caret-up color-green"></i> <span id="RecoveredToday" class="changeData"></span></div>
-                                </div>
-                                <div class="col-sm-3 col-xs-6">
-                                    <div class="key"><i class="fa fa-ban"></i> Deceased</div>
-                                    <div class="value"><span id="Deceased">0</span> <i class="fa fa-caret-up color-red"></i> <span id="DeceasedToday" class="changeData"></span></div>
-                                </div>
+                                    <div class="col-sm-3 col-xs-6">
+                                        <div class="key"><i class="fa fa-bed"></i> Active</div>
+                                            <div class="value"><span id="Active">0</span> </div>
+                                        </div>
+                                        <div class="col-sm-3 col-xs-6">
+                                            <div class="key"><i class="fa fa-plus-square"></i> Recovered</div>
+                                            <div class="value"><span id="Recovered">0</span> <i class="fa fa-caret-up color-green"></i> <span id="RecoveredToday" class="changeData"></span></div>
+                                        </div>
+                                        <div class="col-sm-3 col-xs-6">
+                                            <div class="key"><i class="fa fa-ban"></i> Deceased</div>
+                                            <div class="value"><span id="Deceased">0</span> <i class="fa fa-caret-up color-red"></i> <span id="DeceasedToday" class="changeData"></span></div>
+                                    </div>
                             </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="widget">
-                    <header>
-                        <h4>
-                            Daily 
-                            <small>
-                                Trends.
-                            </small>
-                        </h4>
-                        <div class="widget-controls">
-                            <a title="Options" href="#"><i class="glyphicon glyphicon-cog"></i></a>
-                            <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
-                            <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
-                            <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
-                        </div>
-                    </header>
-                    <div class="body no-margin">
-                        <div id="prediction-chart" class="chart visits-chart">
-                            <svg></svg>
                         </div>
                     </div>
                 </section>
@@ -601,48 +607,23 @@
                         </div>
                     </div>
                 </section>
-                <!-- <section class="widget">
+                <section class="widget">
                     <header>
                         <h4>
-                            Server Overview
+                            <span id="stateMap">Map</span>
                         </h4>
                         <div class="actions">
-                            <small class="text-muted pull-right">2 days ago</small>
+                            <small class="text-muted pull-right"><a id="stateMapDB" href="https://www.livecovid19.org/apic/datamap.php">Download Database</a></small>
                         </div>
                     </header>
                     <div class="body">
-                        <ul class="server-stats">
-                            <li>
-                                <div class="key pull-right">CPU</div>
-                                <div class="stat">
-                                    <div class="info">60% / 37&deg;C / 3.3 Ghz</div>
-                                    <div class="progress progress-small">
-                                        <div class="progress-bar progress-bar-danger" style="width: 70%;"></div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="key pull-right">Mem</div>
-                                <div class="stat">
-                                    <div class="info">29% / 4GB (16 GB)</div>
-                                    <div class="progress progress-small">
-                                        <div class="progress-bar" style="width: 29%;"></div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="key pull-right">LAN</div>
-                                <div class="stat">
-                                    <div class="info">6 Mb/s <i class="fa fa-caret-down"></i> &nbsp; 3 Mb/s <i class="fa fa-caret-up"></i></div>
-                                    <div class="progress progress-small">
-                                        <div class="progress-bar progress-bar-inverse" style="width: 48%;"></div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                        <div id='map' class='flex-child--grow'></div>
+                        <div class='prose flex-child' style="display:none">
+                        <div id='feature-table'> </div>
+                        </div>
                     </div>
-                </section> -->
-            <!-- </div> -->
+                </section>
+            </div>
         </div>
             <footer class="content-footer">
                 <section class="widget">
@@ -713,11 +694,41 @@
         <script src="lib/d3/d3.min.js"></script>
         <script src="lib/nvd3/build/nv.d3.min.js"></script>
 
+        <!-- am4 chart -->
+        <script src="https://www.amcharts.com/lib/4/core.js"></script>
+        <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+        <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+
         <!-- page application js -->
         <script src="js/index.js"></script>
         <script src="js/chat.js"></script>
         <script src="js/socket.js"></script>
+        <!--     Mapbox GL JS -->
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
+        <!-- Mapbox Geocoder -->
+        <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
+        <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />
+        <!-- Mapbox GL Extensions -->
+        <script src='https://cdn.jsdelivr.net/gh/publicmap/mapbox-gl-tools@master/dist/addMapControls.js'></script>
+        <link href='https://cdn.jsdelivr.net/gh/publicmap/mapbox-gl-tools@master/dist/addMapControls.css' rel='stylesheet'>
+
+        <!--  Mapbox Assembly CSS -->
+        <!-- <link href='https://api.mapbox.com/mapbox-assembly/v0.23.1/assembly.min.css' rel='stylesheet'> -->
+        <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.23.1/assembly.js"></script>
+
+        <!-- Turf -->
+        <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+
+        <!-- CSV to JSON -->
+        <script src='https://cdn.jsdelivr.net/gh/Keyang/node-csvtojson@master/browser/csvtojson.min.js'></script>
+        <script src="https://cdn.jsdelivr.net/npm/json2html-list"></script>
+
+        <!-- Table builder -->
+        <script src='https://cdn.jsdelivr.net/gh/a-x-/table-builder/tablebuilder.js'></script>
         <script src="js/api.js"></script>
+
 
 
         <!-- page template -->
