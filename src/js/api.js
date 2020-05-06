@@ -198,8 +198,8 @@ if ($('.table').length > 0) {
         nv.addGraph(function() {
           var maxf = data.daily[Object.keys(data.daily)[Object.keys(data.daily).length-1]];
           var maxy = Math.ceil(maxf.totalconfirmed/1000)*1000;
-          //var chart = nv.models.lineWithFocusChart().yDomain([0,maxy]).rightAlignYAxis(true)
-          var chart = nv.models.lineWithFocusChart().rightAlignYAxis(true)
+          var chart = nv.models.lineWithFocusChart().yDomain([0,maxy]).rightAlignYAxis(true)
+          //var chart = nv.models.lineWithFocusChart().rightAlignYAxis(true)
               .useInteractiveGuideline(true)
               .margin({top: 0, bottom: 25, left: 0, right: 25})
               //.showLegend(false)
@@ -222,7 +222,7 @@ if ($('.table').length > 0) {
               .tickFormat(function(d) { return d3.time.format('%b %d')(new Date(d)) });
           
          // chart.yScale(d3.scale.log());
-          chart.forceY([1,50000]);
+         //chart.forceY([1,50000]);
          // chart.yScale( d3.scale.log().base(4) );
 
         chart.brushExtent([new Date(day1mo.getTime()), new Date()])
@@ -296,20 +296,20 @@ if ($('.table').length > 0) {
             "Confirmed": 1635
           }, {
             "year": "Apr",
-            "Active": 21382,
-            "Confirmed": 29458
+            "Active": 23557,
+            "Confirmed": 33065
           }, {
-            "year": "6 May",
-            "Active": 47900,
-            "Confirmed": 69432,
+            "year": "11 May",
+            "Active": 82000,
+            "Confirmed": 122731,
             "strokeWidth": 1,
             "columnDash": "5,5",
             "fillOpacity": 0.2,
             "additional": "(projection)"
           }, {
-            "year": "11 May",
-            "Active": 105690,
-            "Confirmed": 159731,
+            "year": "16 May",
+            "Active": 115690,
+            "Confirmed": 169731,
             "strokeWidth": 1,
             "columnDash": "5,5",
             "fillOpacity": 0.2,
