@@ -29,7 +29,8 @@
     "passport-local": "^1.0.0",
     "simple-datetime-formater": "^1.0.8",
     "sitemap-generator": "^8.4.2",
-    "http-server": "^0.12.1"
+    "http-server": "^0.12.1",
+    "mongoose-cache": "0.1.5"
   },
   "author": "Abhijeet Patil",
   "license": "GPL"
