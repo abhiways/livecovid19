@@ -17,13 +17,13 @@ var messages = document.getElementById("messages");
   });
 
   socket.on("received", data => {
-    Confirmed.innerText = data.Confirmed;
-    Active.innerText = data.Active;
-    Recovered.innerText = data.Recovered;
-    Deceased.innerText = data.Deceased;
-    ConfirmedToday.innerText = data.ConfirmedToday;
-    RecoveredToday.innerText = data.RecoveredToday;
-    DeceasedToday.innerText = data.DeceasedToday;
+    Confirmed.innerText = data.Confirmed.toLocaleString();
+    Active.innerText = data.Active.toLocaleString();
+    Recovered.innerText = data.Recovered.toLocaleString();
+    Deceased.innerText = data.Deceased.toLocaleString();
+    ConfirmedToday.innerText = data.ConfirmedToday.toLocaleString();
+    RecoveredToday.innerText = data.RecoveredToday.toLocaleString();
+    DeceasedToday.innerText = data.DeceasedToday.toLocaleString();
     /* State Updates */
         statesDataUpdate(data.jsonData, 2);
     /* State Updates Ends */
@@ -59,28 +59,28 @@ function statesDataUpdate(data, upType) {
         if(prop == "deltaconfirmed") { var newconfirmed = obj[prop]; }
           var newconfirmed = obj.deltaconfirmed; 
             if(upType == 1) {
-            confirmed = "<span id='confirmed-"+statecode+"'>"+confirmed+"</span> <i class='fa fa-caret-up color-red'></i>  <span id='newconfirmed-"+statecode+"' class='rowsmalltxt'> "+newconfirmed+"</span>";
+            confirmed = "<span id='confirmed-"+statecode+"'>"+confirmed.toLocaleString()+"</span> <i class='fa fa-caret-up color-red'></i>  <span id='newconfirmed-"+statecode+"' class='rowsmalltxt'> "+newconfirmed.toLocaleString()+"</span>";
             } else {
-              $("#confirmed-"+statecode+"").html(""+confirmed+"");
-              $("#newconfirmed-"+statecode+"").html(""+newconfirmed+"");
+              $("#confirmed-"+statecode+"").html(""+confirmed.toLocaleString()+"");
+              $("#newconfirmed-"+statecode+"").html(""+newconfirmed.toLocaleString()+"");
             }
         }
         if(prop == "deaths") { var deaths = obj[prop];
           var newdeaths = obj.deltadeaths;
             if(upType == 1) {
-            deaths = "<span id='deaths-"+statecode+"'>"+deaths+"</span> <i class='fa fa-caret-up color-red'></i>  <span id='newdeaths-"+statecode+"' class='rowsmalltxt'> "+newdeaths+"</span>";
+            deaths = "<span id='deaths-"+statecode+"'>"+deaths.toLocaleString()+"</span> <i class='fa fa-caret-up color-red'></i>  <span id='newdeaths-"+statecode+"' class='rowsmalltxt'> "+newdeaths.toLocaleString()+"</span>";
             } else {
-              $("#deaths-"+statecode+"").html(""+deaths+"");
-              $("#newdeaths-"+statecode+"").html(""+newdeaths+"");
+              $("#deaths-"+statecode+"").html(""+deaths.toLocaleString()+"");
+              $("#newdeaths-"+statecode+"").html(""+newdeaths.toLocaleString()+"");
             }
         }
         if(prop == "recovered") { var recovered = obj[prop]; 
           var newrecovered = obj.deltarecovered;
             if(upType == 1) {
-            recovered = "<span id='recovered-"+statecode+"'>"+recovered+"</span> <i class='fa fa-caret-up color-green'></i>  <span id='newrecovered-"+statecode+"' class='rowsmalltxt'> "+newrecovered+"</span>";
+            recovered = "<span id='recovered-"+statecode+"'>"+recovered.toLocaleString()+"</span> <i class='fa fa-caret-up color-green'></i>  <span id='newrecovered-"+statecode+"' class='rowsmalltxt'> "+newrecovered.toLocaleString()+"</span>";
             } else {
-              $("#recovered-"+statecode+"").html(""+recovered+"");
-              $("#newrecovered-"+statecode+"").html(""+newrecovered+"");
+              $("#recovered-"+statecode+"").html(""+recovered.toLocaleString()+"");
+              $("#newrecovered-"+statecode+"").html(""+newrecovered.toLocaleString()+"");
           }
         }
         if(prop == "lastupdatedtime") { 
@@ -100,10 +100,10 @@ function statesDataUpdate(data, upType) {
               if(propch == "confirmed") { 
                 if(objch.delta.confirmed > 0) {
                   if(upType == 1) {
-                    var confirmeddist = "<span id='confirmeddist-"+statecode+"'>"+objch[propch]+"</span> <i class='fa fa-caret-up color-red'></i>  <span id='confirmeddisttoday-"+statecode+"' class='rowsmalltxt'> "+objch.delta.confirmed+"</span>";
+                    var confirmeddist = "<span id='confirmeddist-"+statecode+"'>"+objch[propch]+"</span> <i class='fa fa-caret-up color-red'></i>  <span id='confirmeddisttoday-"+statecode+"' class='rowsmalltxt'> "+objch.delta.confirmed.toLocaleString()+"</span>";
                   } else {
                     $("#confirmeddist-"+statecode+"").html(""+objch[propch]+"");
-                    $("#confirmeddisttoday-"+statecode+"").html(""+objch.delta.confirmed+"");
+                    $("#confirmeddisttoday-"+statecode+"").html(""+objch.delta.confirmed.toLocaleString()+"");
                   }
                 } else {
                   if(upType == 1) {
@@ -113,7 +113,7 @@ function statesDataUpdate(data, upType) {
                   }
                 }
                 if(upType == 1) {
-                  var districtmarkuptd = "<tr><td></td><td>"+ keych +"</td><td>"+ confirmeddist +"</td></tr>";
+                  var districtmarkuptd = "<tr><td></td><td>"+ keych +"</td><td>"+ confirmeddist.toLocaleString() +"</td></tr>";
                   distarr.push(districtmarkuptd);
                 }
               }
@@ -122,7 +122,7 @@ function statesDataUpdate(data, upType) {
         }
     }
     if(upType == 1) {
-      var markup = "<tr class='header'><td></td><td onclick='MapChange(\"" + state + "\")'>" + state + "</td><td class='color-orange'>" + confirmed +"<td>"+ active +"<td class='color-lime'>"+ deaths +"<td class='color-green'>"+ recovered +"<td style='display:none;'>"+ updated +"</td></tr>"+distarr.join('');
+      var markup = "<tr class='header'><td></td><td onclick='MapChange(\"" + state + "\")'>" + state + "</td><td class='color-orange'>" + confirmed +"<td>"+ active.toLocaleString() +"<td class='color-lime'>"+ deaths +"<td class='color-green'>"+ recovered +"<td style='display:none;'>"+ updated +"</td></tr>"+distarr.join('');
       $("#StateData tbody").append(markup);
       $("#cover").fadeOut(1750);
     }
@@ -148,14 +148,14 @@ if ($('.table').length > 0) {
     })
     .then(json => {
       json.map(data => {
-        Confirmed.innerText = data.data.total_values.confirmed;
-        ConfirmedToday.innerText = data.data.total_values.deltaconfirmed;
-        Active.innerText = data.data.total_values.active;
+        Confirmed.innerText = data.data.total_values.confirmed.toLocaleString();
+        ConfirmedToday.innerText = data.data.total_values.deltaconfirmed.toLocaleString();
+        Active.innerText = data.data.total_values.active.toLocaleString();
         //ActiveToday.innerText = data.data.total_values.deltaconfirmed;
-        Recovered.innerText = data.data.total_values.recovered;
-        RecoveredToday.innerText = data.data.total_values.deltarecovered;
-        Deceased.innerText = data.data.total_values.deaths;
-        DeceasedToday.innerText = data.data.total_values.deltadeaths;
+        Recovered.innerText = data.data.total_values.recovered.toLocaleString();
+        RecoveredToday.innerText = data.data.total_values.deltarecovered.toLocaleString();
+        Deceased.innerText = data.data.total_values.deaths.toLocaleString();
+        DeceasedToday.innerText = data.data.total_values.deltadeaths.toLocaleString();
         statesDataUpdate(data, 1);
       });
     });
@@ -201,7 +201,7 @@ if ($('.table').length > 0) {
           var chart = nv.models.lineWithFocusChart().yDomain([0,maxy]).rightAlignYAxis(true)
           //var chart = nv.models.lineWithFocusChart().rightAlignYAxis(true)
               .useInteractiveGuideline(true)
-              .margin({top: 0, bottom: 25, left: 0, right: 25})
+              .margin({top: 0, bottom: 25, left: 0, right: 30})
               //.showLegend(false)
               .color([
                   '#6294c9', '#fc9803', '#48f702', '#fc030b'
@@ -300,14 +300,18 @@ if ($('.table').length > 0) {
             "Confirmed": 33065
           }, {
             "year": "11 May",
-            "Active": 82000,
-            "Confirmed": 122731,
+            "Active": 45925,
+            "Confirmed": 70768,
+          }, {
+            "year": "21 May",
+            "Active": 62200,
+            "Confirmed": 110200,
             "strokeWidth": 1,
             "columnDash": "5,5",
             "fillOpacity": 0.2,
             "additional": "(projection)"
           }, {
-            "year": "16 May",
+            "year": "1 Jun",
             "Active": 115690,
             "Confirmed": 169731,
             "strokeWidth": 1,
