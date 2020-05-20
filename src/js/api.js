@@ -17,13 +17,13 @@ var messages = document.getElementById("messages");
   });
 
   socket.on("received", data => {
-    Confirmed.innerText = data.Confirmed.toLocaleString();
-    Active.innerText = data.Active.toLocaleString();
-    Recovered.innerText = data.Recovered.toLocaleString();
-    Deceased.innerText = data.Deceased.toLocaleString();
-    ConfirmedToday.innerText = data.ConfirmedToday.toLocaleString();
-    RecoveredToday.innerText = data.RecoveredToday.toLocaleString();
-    DeceasedToday.innerText = data.DeceasedToday.toLocaleString();
+    $("#Confirmed").html(""+data.Confirmed.toLocaleString()+"");
+    $("#Active").html(""+data.Active.toLocaleString()+"");
+    $("#Recovered").html(""+data.Recovered.toLocaleString()+"");
+    $("#Deceased").html(""+data.Deceased.toLocaleString()+"");
+    $("#ConfirmedToday").html(""+data.ConfirmedToday.toLocaleString()+"");
+    $("#RecoveredToday").html(""+data.RecoveredToday.toLocaleString()+"");
+    $("#DeceasedToday").html(""+data.DeceasedToday.toLocaleString()+"");
     /* State Updates */
         statesDataUpdate(data.jsonData, 2);
     /* State Updates Ends */
