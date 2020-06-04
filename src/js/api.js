@@ -299,21 +299,13 @@ if ($('.table').length > 0) {
             "Active": 23557,
             "Confirmed": 33065
           }, {
-            "year": "11 May",
-            "Active": 45925,
-            "Confirmed": 70768,
+            "year": "May",
+            "Active": 93381,
+            "Confirmed": 190649,
           }, {
-            "year": "21 May",
-            "Active": 62200,
-            "Confirmed": 110200,
-            "strokeWidth": 1,
-            "columnDash": "5,5",
-            "fillOpacity": 0.2,
-            "additional": "(projection)"
-          }, {
-            "year": "1 Jun",
-            "Active": 115690,
-            "Confirmed": 169731,
+            "year": "June",
+            "Active": 195301,
+            "Confirmed": 495372,
             "strokeWidth": 1,
             "columnDash": "5,5",
             "fillOpacity": 0.2,
